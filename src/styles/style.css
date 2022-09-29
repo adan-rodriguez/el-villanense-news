@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  min-width: 320px;
+  padding-top: 72px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/*-------------- HEADER --------------- */
+
+.top-header {
+    background-color: black;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.top-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 3rem;
+  font-weight: 900;
+  user-select: none;
+}
+
+.logo-top {
+  margin-left: 10px;
+}
+
+.open-menu,
+.close-menu {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.open-menu-none {
+  display: none;
+}
+
+.close-menu {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+.top-navbar {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 72px;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  overflow-y: auto;
+}
+
+.top-navbar-block {
+  display: flex;
+}
+
+.top-navbar ul {
+  list-style-type: none;
+  text-align: center;
+}
+
+.top-navbar ul li {
+  margin-bottom: 10px;
+}
+
+.social-nav a{
+  margin: 0 10px;
+}
+
+/*----------------- MAIN ----------------------*/
+
+.news-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    row-gap: 20px;
+}
+
+.news-link {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.news-img {
+    width: 100%;
+}
+
+/* ------------------ FOOTER ------------------- */
+
+.footer {
+  background-color: black;
+  color: white;
+}
+.social-footer {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.social-footer a {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.social-footer a:hover {
+  transform: scale(1.1);
+}
+
+.logo-footer {
+  text-align: center;
+}
+
+.address-footer {
+  text-align: center;
+}
+
+.copyright-footer {
+  text-align: center;
+}
+
+/* // Dispositivos X-Small (teléfonos verticales, menos de 576px)
+// No hay media queries para `xs` ya que este es el valor predeterminado en Bootstrap */
+
+/* // Dispositivos pequeños (teléfonos horizontales, 576px y más) */
+@media (min-width: 576px) {
+    .news-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .news-link {
+        width: 45%;
+    }
+}
+
+/* // Dispositivos medianos (tabletas, 768px y más) */
+@media (min-width: 768px) {
+    .news-link {
+        width: 30%;
+    }
+}
+
+/* // Dispositivos grandes (escritorios, 992px y más) */
+@media (min-width: 992px) {
+  .open-menu,
+  .close-menu {
+    display: none;
+  }
+
+  .top-navbar {
+    display: block;
+    position: static;
+    width: auto;
+    height: auto;
+    overflow-y: visible;
+  }
+
+  .top-navbar ul {
+    margin-right: 10px;
+    display: flex;
+    column-gap: 10px;
+  }
+
+  .top-navbar ul li {
+    margin-bottom: 0;
+  }
+  
+  .top-navbar ul li a:hover {
+    border-bottom: 2px solid white;
+  }
+
+  .social-nav {
+    position: fixed;
+    left: 0;
+    top: 40%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 10px 10px 0;
+    padding: 10px 2px;
+  }
+
+  .social-nav a {
+    margin: 0;
+  }
+
+  .social-nav a:hover {
+    transform: scale(1.05);
+  }
+
+  .news-container-article {
+    justify-content: flex-start;
+    padding-left: 40px;
+  }
+
+  .article-container {
+    width: 60%;
+  }
+}
+
+/* // Dispositivos X-Large (escritorios grandes, 1200px y más) */
+@media (min-width: 1200px) {
+}
+
+/* // Dispositivos XX-Large (escritorios más grandes, 1400px y más) */
+@media (min-width: 1400px) {
+}
