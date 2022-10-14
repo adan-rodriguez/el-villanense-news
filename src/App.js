@@ -1,19 +1,19 @@
-import Header from "./components/Header";
-import NewsContainer from "./components/NewsContainer";
-import { Routes, Route } from "react-router-dom";
-import Footer from "./components/Footer";
+import NewsList from "./pages/NewsList";
+import News from "./pages/News";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./Layout";
 
 const App = () => {
   return (
     <>
-      <Header />
       <Routes>
-        <Route path="/" element={<NewsContainer />} />
-        <Route path="/:section" element={<NewsContainer />} />
-        <Route path="/:section/:id" element={<NewsContainer />} />
-        <Route path="*" element={<NewsContainer />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<NewsList />} />
+          <Route path=":section" element={<NewsList />} />
+          <Route path=":section/:id" element={<News />} />
+          <Route path="*" element={<div>Not Found</div>} />
+        </Route>
       </Routes>
-      <Footer />
     </>
   );
 };

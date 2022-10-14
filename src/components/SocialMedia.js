@@ -7,7 +7,7 @@ const SocialMedia = ({ className }) => {
   return (
     <div className={className}>
         <a
-          href="https://www.facebook.com/adan.gabriel.rodriguez/"
+          href="https://www.facebook.com/elvillanense/"
           target="_blank"
           rel='noreferrer'
           title="Seguinos en Facebook"
@@ -15,7 +15,7 @@ const SocialMedia = ({ className }) => {
           <img width={30} height={30} src={facebook_icon} alt="Facebook" loading="lazy" />
         </a>
         <a
-          href="https://www.instagram.com/adan.rodriguez_/?hl=es-la"
+          href="https://www.instagram.com/el_villanense/?hl=es-la"
           target="_blank"
           rel='noreferrer'
           title="Seguinos en Instagram"

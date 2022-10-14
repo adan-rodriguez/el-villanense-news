@@ -55,7 +55,7 @@ const Header = () => {
                   {...(innerWidth < 992 && {
                     onClick: () => setMenuopen(!menuopen),
                   })}
-                  to="/locales"
+                  to="locales"
                 >
                   Locales
                 </Link>
@@ -65,7 +65,7 @@ const Header = () => {
                   {...(innerWidth < 992 && {
                     onClick: () => setMenuopen(!menuopen),
                   })}
-                  to="/regionales"
+                  to="regionales"
                 >
                   Regionales
                 </Link>
@@ -75,7 +75,7 @@ const Header = () => {
                   {...(innerWidth < 992 && {
                     onClick: () => setMenuopen(!menuopen),
                   })}
-                  to="/provinciales"
+                  to="provinciales"
                 >
                   Provinciales
                 </Link>
@@ -85,7 +85,7 @@ const Header = () => {
                   {...(innerWidth < 992 && {
                     onClick: () => setMenuopen(!menuopen),
                   })}
-                  to="/nacionales"
+                  to="nacionales"
                 >
                   Nacionales
                 </Link>
@@ -95,7 +95,7 @@ const Header = () => {
                   {...(innerWidth < 992 && {
                     onClick: () => setMenuopen(!menuopen),
                   })}
-                  to="/internacionales"
+                  to="internacionales"
                 >
                   Internacionales
                 </Link>

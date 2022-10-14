@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 * {
   margin: 0;
@@ -13,17 +13,17 @@ body {
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 /*-------------- HEADER --------------- */
 
 .top-header {
-    background-color: black;
-    position: fixed;
-    top: 0;
-    width: 100%;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .top-header-container {
@@ -88,31 +88,33 @@ a {
   margin-bottom: 10px;
 }
 
-.social-nav a{
+.social-nav a {
   margin: 0 10px;
 }
 
 /*----------------- MAIN ----------------------*/
 
 .news-container {
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    row-gap: 20px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  row-gap: 20px;
 }
 
 .news-link {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .news-img {
-    width: 100%;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
 }
 
 /* ------------------ FOOTER ------------------- */
@@ -136,6 +138,7 @@ a {
 }
 
 .logo-footer {
+  display: block;
   text-align: center;
 }
 
@@ -152,21 +155,25 @@ a {
 
 /* // Dispositivos pequeños (teléfonos horizontales, 576px y más) */
 @media (min-width: 576px) {
-    .news-container {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
+  .news-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 
-    .news-link {
-        width: 45%;
-    }
+  .news-link {
+    width: 45%;
+  }
 }
 
 /* // Dispositivos medianos (tabletas, 768px y más) */
 @media (min-width: 768px) {
-    .news-link {
-        width: 30%;
-    }
+  .news-link {
+    width: 30%;
+  }
+
+  .news-img-bigger {
+    height: 450px;
+  }
 }
 
 /* // Dispositivos grandes (escritorios, 992px y más) */
@@ -193,7 +200,7 @@ a {
   .top-navbar ul li {
     margin-bottom: 0;
   }
-  
+
   .top-navbar ul li a:hover {
     border-bottom: 2px solid white;
   }
