@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NewsItem from "../components/NewsItem";
-import { newsAPI, newsAPI_filter_section } from "../services/newsAPI";
+import { db } from "../firebase/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
 
   const { section } = useParams();
 
+  const articlesCollection = collection(db, "articles");
+
   const getNews = async () => {
-    const news = await newsAPI();
-    const news_section = await newsAPI_filter_section(section)
-
+    const data = await getDocs(articlesCollection);
+    const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    console.log(articles);
     section
-      ? setNews(news_section).reverse()
-      : setNews(news.reverse());
+      ? setNews(articles.filter((article) => article.section === section))
+      : setNews(articles);
   };
-
+  console.log(news);
   useEffect(() => {
     getNews();
   }, [section]);

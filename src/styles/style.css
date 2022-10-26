@@ -17,6 +17,10 @@ a {
   color: inherit;
 }
 
+ul {
+  list-style-type: none;
+}
+
 /*-------------- HEADER --------------- */
 
 .top-header {
@@ -36,7 +40,7 @@ a {
 }
 
 .logo {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 900;
   user-select: none;
 }
@@ -117,29 +121,29 @@ a {
   object-fit: cover;
 }
 
+.content-article {
+  white-space: pre-line;
+}
+
 /* ------------------ FOOTER ------------------- */
 
 .footer {
   background-color: black;
   color: white;
-}
-.social-footer {
-  text-align: center;
-  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+  padding: 10px 10px 5px;
 }
 
-.social-footer a {
-  margin: 0 10px;
-  display: inline-block;
+.social-footer {
+  display: flex;
+  column-gap: 20px;
 }
 
 .social-footer a:hover {
   transform: scale(1.1);
-}
-
-.logo-footer {
-  display: block;
-  text-align: center;
 }
 
 .address-footer {
@@ -148,6 +152,40 @@ a {
 
 .copyright-footer {
   text-align: center;
+}
+
+/*------------------ Admin --------------------*/
+
+.form-add-article {
+  width: 90%;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  max-width: 1000px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.form-add-article label {
+  display: block;
+}
+
+.form-add-article input, .form-add-article textarea {
+  width: 100%;
+  border: 1px solid black;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  padding: 5px 10px;
+}
+
+.form-add-article input {
+  height: 2rem;
+}
+
+.form-add-article textarea {
+  resize: none;
 }
 
 /* // Dispositivos X-Small (teléfonos verticales, menos de 576px)
@@ -167,6 +205,10 @@ a {
 
 /* // Dispositivos medianos (tabletas, 768px y más) */
 @media (min-width: 768px) {
+  .logo {
+    font-size: 2.5rem;
+  }
+
   .news-link {
     width: 30%;
   }
@@ -236,6 +278,9 @@ a {
 
 /* // Dispositivos X-Large (escritorios grandes, 1200px y más) */
 @media (min-width: 1200px) {
+  .logo {
+    font-size: 3rem;
+  }
 }
 
 /* // Dispositivos XX-Large (escritorios más grandes, 1400px y más) */
