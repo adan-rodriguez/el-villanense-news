@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NewsItem from "../components/NewsItem";
 import { db } from "../firebase/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy } from "firebase/firestore";
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
@@ -13,6 +13,7 @@ const NewsList = () => {
 
   const getNews = async () => {
     const data = await getDocs(articlesCollection);
+    console.log(data);
     const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     console.log(articles);
     section

@@ -4,12 +4,14 @@ import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 const Admin = () => {
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [datetime, setDatetime] = useState("");
-  const [lead, setLead] = useState("");
-  const [section, setSection] = useState("");
-  const [content, setContent] = useState("");
+  const [article, setArticle] = useState({
+    title: "",
+    image: "",
+    datetime: "",
+    lead: "",
+    section: "",
+    content: "",
+  });
 
   const navigate = useNavigate();
 
@@ -18,13 +20,14 @@ const Admin = () => {
   const addArticle = async (e) => {
     e.preventDefault();
 
-    await addDoc(newsCollection, {
-      title,
-      image,
-      datetime,
-      lead,
-      section,
-      content,
+    await addDoc(newsCollection, article);
+    navigate("/");
+  };
+
+  const handleChange = (e) => {
+    setArticle({
+      ...article,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -39,8 +42,9 @@ const Admin = () => {
             name="title"
             id="title"
             placeholder="Título"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            required
+            value={article.title}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -50,19 +54,21 @@ const Admin = () => {
             name="image"
             id="image"
             placeholder="URL Imagen"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+            required
+            value={article.image}
+            onChange={handleChange}
           />
         </div>
         <div>
           <label htmlFor="datetime">Fecha y hora</label>
           <input
-            type="text"
+            type="datetime-local"
             name="datetime"
             id="datetime"
             placeholder="Fecha y hora"
-            value={datetime}
-            onChange={(e) => setDatetime(e.target.value)}
+            required
+            value={article.datetime}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -72,21 +78,36 @@ const Admin = () => {
             name="lead"
             id="lead"
             placeholder="Entrada"
-            value={lead}
-            onChange={(e) => setLead(e.target.value)}
+            required
+            value={article.lead}
+            onChange={handleChange}
             rows="4"
           ></textarea>
         </div>
         <div>
           <label htmlFor="section">Sección</label>
-          <input
+          {/* <input
             type="text"
             name="section"
             id="section"
             placeholder="Sección"
-            value={section}
-            onChange={(e) => setSection(e.target.value)}
-          />
+            required
+            value={article.section}
+            onChange={handleChange}
+          /> */}
+          <select
+            name="section"
+            id="section"
+            required
+            value={article.section}
+            onChange={handleChange}
+          >
+            <option value="locales">Locales</option>
+            <option value="regionales">Regionales</option>
+            <option value="provinciales">Provinciales</option>
+            <option value="nacionales">Nacionales</option>
+            <option value="internacionales">Internacionales</option>
+          </select>
         </div>
         <div>
           <label htmlFor="content">Cuerpo</label>
@@ -95,8 +116,9 @@ const Admin = () => {
             name="content"
             id="content"
             placeholder="Cuerpo"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            required
+            value={article.content}
+            onChange={handleChange}
             rows="10"
           ></textarea>
         </div>

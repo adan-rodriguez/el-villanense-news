@@ -25,13 +25,16 @@ const News = () => {
   return (
     <main className="news-container news-container-article">
       {news.map((article) => {
+        function createMarkup() {
+          return {__html: article.content};
+        }
         return (
           <article key={article.id} className="article-container">
             <h1>{article.title}</h1>
             <time dateTime={article.datetime}>{article.datetime}</time>
             <p>{article.lead}</p>
             <img className="news-img news-img-bigger" src={article.image} alt={article.title} loading="lazy" />
-            <p className="content-article">{article.content}</p>
+            <div dangerouslySetInnerHTML={createMarkup()} className="content-article"></div>
           </article>
         );
       })}
