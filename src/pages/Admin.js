@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import Tiny from "../utils/tiny";
 
 const Admin = () => {
   const [article, setArticle] = useState({
@@ -30,6 +31,13 @@ const Admin = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const getContentTiny = async (content) => {
+    setArticle({
+      ...article,
+      content: content,
+    });
+  }
 
   return (
     <div>
@@ -109,7 +117,7 @@ const Admin = () => {
             <option value="internacionales">Internacionales</option>
           </select>
         </div>
-        <div>
+        {/* <div>
           <label htmlFor="content">Cuerpo</label>
           <textarea
             type="text"
@@ -121,7 +129,9 @@ const Admin = () => {
             onChange={handleChange}
             rows="10"
           ></textarea>
-        </div>
+        </div> */}
+        {/* <textarea name="content" id="mytextarea">Hello, World!</textarea> */}
+        <Tiny get={getContentTiny} />
         <button type="submit">Subir artículo</button>
       </form>
     </div>
