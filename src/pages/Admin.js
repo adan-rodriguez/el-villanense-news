@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { db } from "../firebase/firebase";
+import app, { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import Tiny from "../utils/tiny";
+import { getAuth, signOut } from "firebase/auth";
 
 const Admin = () => {
   const [article, setArticle] = useState({
@@ -37,7 +38,20 @@ const Admin = () => {
       ...article,
       content: content,
     });
-  }
+  };
+
+  const auth = getAuth(app);
+
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        /*Sign-out successful.*/
+        navigate("/login")
+      })
+      // .catch((error) => {
+      //   /*An error happened.*/
+      // });
+  };
 
   return (
     <div>
@@ -134,6 +148,7 @@ const Admin = () => {
         <Tiny get={getContentTiny} />
         <button type="submit">Subir artículo</button>
       </form>
+      <button onClick={logout}>Cerrar sesión</button>
     </div>
   );
 };
