@@ -55,7 +55,7 @@ const Admin = () => {
 
   return (
     <div>
-      <h1>Nuevo artículo</h1>
+      <h1 className="title-new-article">Nuevo artículo</h1>
       <form className="form-add-article" onSubmit={addArticle}>
         <div>
           <label htmlFor="title">Título</label>
@@ -146,7 +146,7 @@ const Admin = () => {
         </div> */}
         {/* <textarea name="content" id="mytextarea">Hello, World!</textarea> */}
         <Tiny get={getContentTiny} />
-        <button type="submit">Subir artículo</button>
+        <button className="btn-upload-article" type="submit">Subir artículo</button>
       </form>
       <button onClick={logout}>Cerrar sesión</button>
     </div>

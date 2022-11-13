@@ -26,7 +26,7 @@ const LoginPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form-login" onSubmit={handleSubmit}>
       <div>
         <label htmlFor="email">Email</label>
         <input type="text" name="email" id="email" required />
@@ -35,7 +35,7 @@ const LoginPage = () => {
         <label htmlFor="password">Contraseña</label>
         <input type="password" name="password" id="password" required />
       </div>
-      <button type="submit">Ingresar</button>
+      <button className="btn-login" type="submit">Ingresar</button>
     </form>
   );
 };

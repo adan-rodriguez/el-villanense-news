@@ -9,7 +9,11 @@
 body {
   font-family: "Poppins", sans-serif;
   min-width: 320px;
-  padding-top: 72px;
+  padding-top: 48px;
+}
+
+main {
+  min-height: calc(100vh - 278px);
 }
 
 a {
@@ -21,6 +25,10 @@ ul {
   list-style-type: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 /*-------------- HEADER --------------- */
 
 .top-header {
@@ -28,6 +36,7 @@ ul {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 2;
 }
 
 .top-header-container {
@@ -53,17 +62,13 @@ ul {
 .close-menu {
   background-color: transparent;
   border: none;
-  cursor: pointer;
-}
-
-.open-menu-none {
-  display: none;
+  height: 48px;
 }
 
 .close-menu {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 0;
+  right: 0;
 }
 
 .top-navbar {
@@ -72,24 +77,20 @@ ul {
   align-items: center;
   position: fixed;
   left: 0;
-  top: 72px;
+  top: 48px;
   width: 100%;
   height: 100%;
   background-color: black;
   overflow-y: auto;
-}
-
-.top-navbar-block {
-  display: flex;
+  padding-top: 30px;
 }
 
 .top-navbar ul {
-  list-style-type: none;
   text-align: center;
 }
 
 .top-navbar ul li {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .social-nav a {
@@ -99,30 +100,18 @@ ul {
 /*----------------- MAIN ----------------------*/
 
 .news-container {
-  width: 100%;
   max-width: 1440px;
   margin: 0 auto;
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   row-gap: 20px;
-}
-
-.news-link {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 }
 
 .news-img {
   width: 100%;
   height: 300px;
   object-fit: cover;
-}
-
-.content-article {
-  white-space: pre-line;
 }
 
 /* ------------------ FOOTER ------------------- */
@@ -146,19 +135,53 @@ ul {
   transform: scale(1.1);
 }
 
-.address-footer {
-  text-align: center;
-}
-
+.address-footer,
 .copyright-footer {
   text-align: center;
 }
 
+/*------------------ Login --------------------*/
+
+.form-login {
+  width: 95%;
+  max-width: 400px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.form-login label {
+  display: block;
+}
+
+.form-login input {
+  width: 100%;
+  border: 1px solid black;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  padding: 5px 10px;
+}
+
+.btn-login {
+  align-self: center;
+  padding: 5px 30px;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  font-size: 1rem;
+}
+
 /*------------------ Admin --------------------*/
 
+.title-new-article {
+  text-align: center;
+}
 .form-add-article {
   width: 90%;
-  margin: 20px auto;
+  margin: 0 auto 20px;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -171,7 +194,9 @@ ul {
   display: block;
 }
 
-.form-add-article input, .form-add-article textarea {
+.form-add-article input,
+.form-add-article textarea,
+.form-add-article select {
   width: 100%;
   border: 1px solid black;
   font-family: "Poppins", sans-serif;
@@ -188,6 +213,14 @@ ul {
   resize: none;
 }
 
+.btn-upload-article {
+  align-self: center;
+  padding: 10px 40px;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  font-size: 1rem;
+}
+
 /* // Dispositivos X-Small (teléfonos verticales, menos de 576px)
 // No hay media queries para `xs` ya que este es el valor predeterminado en Bootstrap */
 
@@ -196,6 +229,7 @@ ul {
   .news-container {
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-evenly;
   }
 
   .news-link {
@@ -209,8 +243,16 @@ ul {
     font-size: 2.5rem;
   }
 
-  .news-link {
-    width: 30%;
+  body {
+    padding-top: 60px;
+  }
+
+  .top-navbar {
+    top: 60px;
+  }
+
+  .close-menu {
+    top: 6px;
   }
 
   .news-img-bigger {
@@ -231,6 +273,7 @@ ul {
     width: auto;
     height: auto;
     overflow-y: visible;
+    padding-top: 0;
   }
 
   .top-navbar ul {
@@ -266,6 +309,10 @@ ul {
     transform: scale(1.05);
   }
 
+  .news-link {
+    width: 30%;
+  }
+
   .news-container-article {
     justify-content: flex-start;
     padding-left: 40px;
@@ -280,6 +327,10 @@ ul {
 @media (min-width: 1200px) {
   .logo {
     font-size: 3rem;
+  }
+
+  body {
+    padding-top: 72px;
   }
 }
 

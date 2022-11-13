@@ -15,7 +15,16 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener("resize", getInnerWidth);
-  }, []);
+    if (menuopen) {
+      document.querySelector(".open-menu").style.display = "none";
+      document.querySelector(".top-navbar").style.display = "flex";
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.querySelector(".open-menu").style.display = "";
+      document.querySelector(".top-navbar").style.display = "";
+      document.body.style.overflowY = "";
+    }
+  }, [menuopen]);
 
   return (
     <header className="top-header">
@@ -23,14 +32,12 @@ const Header = () => {
         <Logo className="logo logo-top" />
         <button
           onClick={() => setMenuopen(!menuopen)}
-          className={menuopen ? "open-menu open-menu-none" : "open-menu"}
+          className="open-menu"
           aria-label="Abrir menú"
         >
           <img src={menu_icon} alt="Abrir menú" />
         </button>
-        <div
-          className={menuopen ? "top-navbar top-navbar-block" : "top-navbar"}
-        >
+        <div className="top-navbar">
           <button
             onClick={() => setMenuopen(!menuopen)}
             className="close-menu"
