@@ -33,7 +33,7 @@ const NewsList = () => {
             key={article.id}
             id={article.id}
             image={article.image}
-            datetime={article.datetime}
+            timestamp={article.timestamp}
             title={article.title}
             section={article.section}
           />

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import getDatetime from "../utils/datetime";
 
 const News = () => {
   const [news, setNews] = useState([]);
@@ -27,10 +28,11 @@ const News = () => {
         function createMarkup() {
           return { __html: article.content };
         }
+        const { dateTime, dateTimeString } = getDatetime(article.timestamp);
         return (
           <article key={article.id} className="article-container">
             <h1>{article.title}</h1>
-            <time dateTime={article.datetime}>{article.datetime}</time>
+            <time dateTime={dateTime}>{dateTimeString}</time>
             <p>{article.lead}</p>
             <img
               className="news-img news-img-bigger"

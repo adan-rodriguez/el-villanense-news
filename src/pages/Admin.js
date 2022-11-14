@@ -9,7 +9,7 @@ const Admin = () => {
   const [article, setArticle] = useState({
     title: "",
     image: "",
-    datetime: "",
+    timestamp: "",
     lead: "",
     section: "",
     content: "",
@@ -18,6 +18,13 @@ const Admin = () => {
   const navigate = useNavigate();
 
   const newsCollection = collection(db, "articles");
+
+  const setTimestamp = () => {
+    setArticle({
+      ...article,
+      timestamp: Date.now(),
+    });
+  };
 
   const addArticle = async (e) => {
     e.preventDefault();
@@ -43,14 +50,13 @@ const Admin = () => {
   const auth = getAuth(app);
 
   const logout = () => {
-    signOut(auth)
-      .then(() => {
-        /*Sign-out successful.*/
-        navigate("/login")
-      })
-      // .catch((error) => {
-      //   /*An error happened.*/
-      // });
+    signOut(auth).then(() => {
+      /*Sign-out successful.*/
+      navigate("/login");
+    });
+    // .catch((error) => {
+    //   /*An error happened.*/
+    // });
   };
 
   return (
@@ -81,7 +87,7 @@ const Admin = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        {/* <div>
           <label htmlFor="datetime">Fecha y hora</label>
           <input
             type="datetime-local"
@@ -92,7 +98,7 @@ const Admin = () => {
             value={article.datetime}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         <div>
           <label htmlFor="lead">Entrada</label>
           <textarea
@@ -124,7 +130,7 @@ const Admin = () => {
             value={article.section}
             onChange={handleChange}
           >
-            <option value="locales">Locales</option>
+            <option value="locales" selected>Locales</option>
             <option value="regionales">Regionales</option>
             <option value="provinciales">Provinciales</option>
             <option value="nacionales">Nacionales</option>
@@ -146,7 +152,13 @@ const Admin = () => {
         </div> */}
         {/* <textarea name="content" id="mytextarea">Hello, World!</textarea> */}
         <Tiny get={getContentTiny} />
-        <button className="btn-upload-article" type="submit">Subir artículo</button>
+        <button
+          onClick={setTimestamp}
+          className="btn-upload-article"
+          type="submit"
+        >
+          Subir artículo
+        </button>
       </form>
       <button onClick={logout}>Cerrar sesión</button>
     </div>
