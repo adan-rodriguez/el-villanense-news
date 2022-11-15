@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import NewsItem from "../components/NewsItem";
 import { db } from "../firebase/firebase";
 import { collection, getDocs, orderBy } from "firebase/firestore";
+import { Helmet } from "react-helmet";
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
@@ -26,20 +27,26 @@ const NewsList = () => {
   }, [section]);
 
   return (
-    <div className="news-container">
-      {news.map((article) => {
-        return (
-          <NewsItem
-            key={article.id}
-            id={article.id}
-            image={article.image}
-            timestamp={article.timestamp}
-            title={article.title}
-            section={article.section}
-          />
-        );
-      })}
-    </div>
+    <>
+      <Helmet>
+        <title>El Villanense</title>
+        <meta name="description" content="Helmet application" />
+      </Helmet>
+      <div className="news-container">
+        {news.map((article) => {
+          return (
+            <NewsItem
+              key={article.id}
+              id={article.id}
+              image={article.image}
+              timestamp={article.timestamp}
+              title={article.title}
+              section={article.section}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 };
 

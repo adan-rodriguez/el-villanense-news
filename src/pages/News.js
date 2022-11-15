@@ -4,6 +4,7 @@ import { db } from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import getDatetime from "../utils/datetime";
 import stringUrl from "../utils/stringUrl";
+import { Helmet } from "react-helmet";
 
 const News = () => {
   const [news, setNews] = useState([]);
@@ -15,7 +16,9 @@ const News = () => {
   const getNews = async () => {
     const data = await getDocs(articlesCollection);
     const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    const article = articles.filter((article) => stringUrl(article.title) === titleUrl);
+    const article = articles.filter(
+      (article) => stringUrl(article.title) === titleUrl
+    );
     setNews(article);
   };
 
@@ -31,21 +34,45 @@ const News = () => {
         }
         const { dateTime, dateTimeString } = getDatetime(article.timestamp);
         return (
-          <article key={article.id} className="article-container">
-            <h1>{article.title}</h1>
-            <time dateTime={dateTime}>{dateTimeString}</time>
-            <p>{article.lead}</p>
-            <img
-              className="news-img news-img-bigger"
-              src={article.image}
-              alt={article.title}
-              loading="lazy"
-            />
-            <div
-              dangerouslySetInnerHTML={createMarkup()}
-              className="content-article"
-            ></div>
-          </article>
+          <>
+            <Helmet>
+              <title>{article.title}</title>
+              <meta name="description" content={article.lead} />
+              <meta property="og:title" content={article.title} />
+              <meta property="og:description" content={article.lead} />
+              <meta property="og:type" content="article" />
+              <meta property="og:url" content={window.location.href} />
+              <meta property="og:image" content={article.image} />
+              <meta property="og:site_name" content="El Villanense" />
+              <meta name="twitter:card" content="summary_large_image" />
+            </Helmet>
+            <article key={article.id} className="article-container">
+              <h1>{article.title}</h1>
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                target="_blank"
+                title="Compartir en Facebook"
+              >
+                <img
+                  class="imgRedesCompartir"
+                  src="../imagenes/facebook.svg"
+                  alt="Facebook"
+                />
+              </a>
+              <time dateTime={dateTime}>{dateTimeString}</time>
+              <p>{article.lead}</p>
+              <img
+                className="news-img news-img-bigger"
+                src={article.image}
+                alt={article.title}
+                loading="lazy"
+              />
+              <div
+                dangerouslySetInnerHTML={createMarkup()}
+                className="content-article"
+              ></div>
+            </article>
+          </>
         );
       })}
     </div>

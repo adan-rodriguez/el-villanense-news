@@ -130,7 +130,8 @@ const Admin = () => {
             value={article.section}
             onChange={handleChange}
           >
-            <option value="locales" selected>Locales</option>
+            <option>-- Seleccione la sección --</option>
+            <option value="locales">Locales</option>
             <option value="regionales">Regionales</option>
             <option value="provinciales">Provinciales</option>
             <option value="nacionales">Nacionales</option>
@@ -166,3 +167,9 @@ const Admin = () => {
 };
 
 export default Admin;
+
+// let date = new Date("2021-09-13T15:50-03:00");
+
+// console.log(date.getTime())
+
+// codigo para obtener el tiemestamp de las noticias que voy a subir a firebase
