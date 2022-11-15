@@ -3,18 +3,19 @@ import { useParams } from "react-router-dom";
 import { db } from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import getDatetime from "../utils/datetime";
+import stringUrl from "../utils/stringUrl";
 
 const News = () => {
   const [news, setNews] = useState([]);
 
-  const { id } = useParams();
+  const { titleUrl } = useParams();
 
   const articlesCollection = collection(db, "articles");
 
   const getNews = async () => {
     const data = await getDocs(articlesCollection);
     const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    const article = articles.filter((article) => article.id === id);
+    const article = articles.filter((article) => stringUrl(article.title) === titleUrl);
     setNews(article);
   };
 
