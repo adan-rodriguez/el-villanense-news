@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import NewsItem from "../components/NewsItem";
 import { db } from "../firebase/firebase";
 import { collection, getDocs, orderBy } from "firebase/firestore";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const NewsList = () => {
   const [news, setNews] = useState([]);

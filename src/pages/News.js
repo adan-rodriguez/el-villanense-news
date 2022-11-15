@@ -7,7 +7,7 @@ import { db } from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import getDatetime from "../utils/datetime";
 import stringUrl from "../utils/stringUrl";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const News = () => {
   const [news, setNews] = useState([]);
@@ -52,6 +52,7 @@ const News = () => {
             <article key={article.id} className="article-container">
               <h1>{article.title}</h1>
               <div>
+                {/* no sé el motivo por el que no funcionan correctamente éstos enlaces para compartir */}
                 <a
                   href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
                   target="_blank"
