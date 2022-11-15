@@ -1,3 +1,6 @@
+import facebook_icon from "../assets/images/facebook.png";
+import twitter_icon from "../assets/images/twitter.png";
+import whatsapp_icon from "../assets/images/whatsapp.png";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase/firebase";
@@ -48,17 +51,44 @@ const News = () => {
             </Helmet>
             <article key={article.id} className="article-container">
               <h1>{article.title}</h1>
-              <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
-                target="_blank"
-                title="Compartir en Facebook"
-              >
-                <img
-                  class="imgRedesCompartir"
-                  src="../imagenes/facebook.svg"
-                  alt="Facebook"
-                />
-              </a>
+              <div>
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                  target="_blank"
+                  title="Compartir en Facebook"
+                >
+                  <img
+                    width={30}
+                    height={30}
+                    src={facebook_icon}
+                    alt="Facebook"
+                  />
+                  <a
+                    href={`https://twitter.com/intent/tweet?text=${article.title}&url=${window.location.href}`}
+                    target="_blank"
+                    title="Compartir en Twitter"
+                  >
+                    <img
+                      width={30}
+                      height={30}
+                      src={twitter_icon}
+                      alt="Twitter"
+                    />
+                  </a>
+                  <a
+                    href={`https://api.whatsapp.com/send?text=${window.location.href}`}
+                    target="_blank"
+                    title="Compartir en Whatsapp"
+                  >
+                    <img
+                      width={30}
+                      height={30}
+                      src={whatsapp_icon}
+                      alt="Whatsapp"
+                    />
+                  </a>
+                </a>
+              </div>
               <time dateTime={dateTime}>{dateTimeString}</time>
               <p>{article.lead}</p>
               <img
