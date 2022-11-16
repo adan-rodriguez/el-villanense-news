@@ -45,7 +45,6 @@ const Admin = () => {
       content: content,
     });
   };
-  console.log(article);
 
   return (
     <div>
@@ -153,9 +152,3 @@ const Admin = () => {
 };
 
 export default Admin;
-
-// let date = new Date("2021-09-13T15:50-03:00");
-
-// console.log(date.getTime())
-
-// codigo para obtener el tiemestamp de las noticias que voy a subir a firebase

@@ -14,15 +14,12 @@ const NewsList = () => {
     const articlesCollection = collection(db, "articles");
     const q = query(articlesCollection, orderBy("timestamp", "desc"));
     const data = await getDocs(q);
-    console.log(data);
     const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    console.log(articles);
     section
       ? setNews(articles.filter((article) => article.section === section))
       : setNews(articles);
   };
   
-  console.log(news);
   useEffect(() => {
     getNews();
     window.scrollTo(0, 0);

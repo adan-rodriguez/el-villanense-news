@@ -29,18 +29,12 @@ const Footer = ({ user }) => {
         <ul>
           <li>
             Correo:{" "}
-            <a
-              href="mailto:redaccion@elvillanense.com.ar"
-              title="Correo Electrónico"
-            >
+            <a href="mailto:redaccion@elvillanense.com.ar">
               redaccion@elvillanense.com.ar
             </a>
           </li>
           <li>
-            Teléfono:{" "}
-            <a href="tel:+5493482524950" title="Teléfono">
-              +54 9 3482 524950
-            </a>
+            Teléfono: <a href="tel:+5493482524950">+54 9 3482 524950</a>
           </li>
           <li>Villa Ana - Santa Fe - Argentina</li>
         </ul>

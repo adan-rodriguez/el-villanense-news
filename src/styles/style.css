@@ -21,10 +21,6 @@ a {
   color: inherit;
 }
 
-ul {
-  list-style-type: none;
-}
-
 button {
   cursor: pointer;
 }
@@ -87,6 +83,7 @@ button {
 
 .top-navbar ul {
   text-align: center;
+  list-style-type: none;
 }
 
 .top-navbar ul li {
@@ -157,7 +154,21 @@ button {
 }
 
 .content-article a {
-  color: #0289CB;
+  color: #0289cb;
+}
+
+.content-article a:hover {
+  text-decoration: underline;
+}
+
+.content-article ul,
+.content-article ol {
+  padding-left: 40px;
+}
+
+.news-link:hover .news-title {
+  transition: .3s;
+  color: #0289cb;
 }
 
 /* ------------------ FOOTER ------------------- */
@@ -184,6 +195,10 @@ button {
 .address-footer,
 .copyright-footer {
   text-align: center;
+}
+
+.address-footer ul {
+  list-style-type: none;
 }
 
 .address-footer a {

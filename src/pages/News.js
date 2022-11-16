@@ -38,7 +38,7 @@ const News = () => {
         }
         const { dateTime, dateTimeString } = getDatetime(article.timestamp);
         return (
-          <>
+          <article key={article.id} className="article-container">
             <Helmet>
               <title>{article.title}</title>
               <meta name="description" content={article.lead} />
@@ -50,64 +50,59 @@ const News = () => {
               <meta property="og:site_name" content="El Villanense" />
               <meta name="twitter:card" content="summary_large_image" />
             </Helmet>
-            <article key={article.id} className="article-container">
-              <h1>{article.title}</h1>
-              <div className="share-social-container">
-                {/* no sé el motivo por el que no funcionan correctamente éstos enlaces para compartir */}
-                <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
-                  target="_blank"
-                  title="Compartir en Facebook"
-                  rel="noreferrer"
-                >
-                  <img
-                    width={30}
-                    height={30}
-                    src={facebook_icon}
-                    alt="Facebook"
-                  />
-                </a>
-                <a
-                  href={`https://twitter.com/intent/tweet?text=${article.title}&url=${window.location.href}`}
-                  target="_blank"
-                  title="Compartir en Twitter"
-                  rel="noreferrer"
-                >
-                  <img
-                    width={30}
-                    height={30}
-                    src={twitter_icon}
-                    alt="Twitter"
-                  />
-                </a>
-                <a
-                  href={`https://api.whatsapp.com/send?text=${window.location.href}`}
-                  target="_blank"
-                  title="Compartir en Whatsapp"
-                  rel="noreferrer"
-                >
-                  <img
-                    width={30}
-                    height={30}
-                    src={whatsapp_icon}
-                    alt="Whatsapp"
-                  />
-                </a>
-              </div>
-              <time className="article-time" dateTime={dateTime}>{dateTimeString}</time>
-              <p className="lead-article">{article.lead}</p>
-              <img
-                className="news-img news-img-bigger"
-                src={article.image}
-                alt={article.title}
-                loading="lazy"
-              />
-              <div
-                dangerouslySetInnerHTML={createMarkup()}
-                className="content-article"
-              ></div>
-            </article>
-          </>
+            <h1>{article.title}</h1>
+            <div className="share-social-container">
+              {/* no sé el motivo por el que no funcionan correctamente éstos enlaces para compartir */}
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                target="_blank"
+                title="Compartir en Facebook"
+                rel="noreferrer"
+              >
+                <img
+                  width={30}
+                  height={30}
+                  src={facebook_icon}
+                  alt="Facebook"
+                />
+              </a>
+              <a
+                href={`https://twitter.com/intent/tweet?text=${article.title}&url=${window.location.href}`}
+                target="_blank"
+                title="Compartir en Twitter"
+                rel="noreferrer"
+              >
+                <img width={30} height={30} src={twitter_icon} alt="Twitter" />
+              </a>
+              <a
+                href={`https://api.whatsapp.com/send?text=${window.location.href}`}
+                target="_blank"
+                title="Compartir en Whatsapp"
+                rel="noreferrer"
+              >
+                <img
+                  width={30}
+                  height={30}
+                  src={whatsapp_icon}
+                  alt="Whatsapp"
+                />
+              </a>
+            </div>
+            <time className="article-time" dateTime={dateTime}>
+              {dateTimeString}
+            </time>
+            <p className="lead-article">{article.lead}</p>
+            <img
+              className="news-img news-img-bigger"
+              src={article.image}
+              alt={article.title}
+              loading="lazy"
+            />
+            <div
+              dangerouslySetInnerHTML={createMarkup()}
+              className="content-article"
+            ></div>
+          </article>
         );
       })}
     </div>
