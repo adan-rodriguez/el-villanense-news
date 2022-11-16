@@ -11,8 +11,8 @@ const NewsItem = ({ image, timestamp, title, section, id }) => {
     <Link className="news-link" to={`/${section}/${titleUrl}`}>
       <article>
         <img className="news-img" src={image} alt={title} loading="lazy" />
-        <time dateTime={dateTime}>{date}</time>
-        <p>{title}</p>
+        <time className="news-time" dateTime={dateTime}>{date}</time>
+        <p className="news-title">{title}</p>
       </article>
     </Link>
   );

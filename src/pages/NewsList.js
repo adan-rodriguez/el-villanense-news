@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NewsItem from "../components/NewsItem";
 import { db } from "../firebase/firebase";
-import { collection, getDocs, orderBy } from "firebase/firestore";
+import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { Helmet } from "react-helmet-async";
 
 const NewsList = () => {
@@ -10,10 +10,10 @@ const NewsList = () => {
 
   const { section } = useParams();
 
-  const articlesCollection = collection(db, "articles");
-
   const getNews = async () => {
-    const data = await getDocs(articlesCollection);
+    const articlesCollection = collection(db, "articles");
+    const q = query(articlesCollection, orderBy("timestamp", "desc"));
+    const data = await getDocs(q);
     console.log(data);
     const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     console.log(articles);
@@ -21,9 +21,11 @@ const NewsList = () => {
       ? setNews(articles.filter((article) => article.section === section))
       : setNews(articles);
   };
+  
   console.log(news);
   useEffect(() => {
     getNews();
+    window.scrollTo(0, 0);
   }, [section]);
 
   return (

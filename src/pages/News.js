@@ -27,6 +27,7 @@ const News = () => {
 
   useEffect(() => {
     getNews();
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -51,12 +52,13 @@ const News = () => {
             </Helmet>
             <article key={article.id} className="article-container">
               <h1>{article.title}</h1>
-              <div>
+              <div className="share-social-container">
                 {/* no sé el motivo por el que no funcionan correctamente éstos enlaces para compartir */}
                 <a
                   href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
                   target="_blank"
                   title="Compartir en Facebook"
+                  rel="noreferrer"
                 >
                   <img
                     width={30}
@@ -64,34 +66,36 @@ const News = () => {
                     src={facebook_icon}
                     alt="Facebook"
                   />
-                  <a
-                    href={`https://twitter.com/intent/tweet?text=${article.title}&url=${window.location.href}`}
-                    target="_blank"
-                    title="Compartir en Twitter"
-                  >
-                    <img
-                      width={30}
-                      height={30}
-                      src={twitter_icon}
-                      alt="Twitter"
-                    />
-                  </a>
-                  <a
-                    href={`https://api.whatsapp.com/send?text=${window.location.href}`}
-                    target="_blank"
-                    title="Compartir en Whatsapp"
-                  >
-                    <img
-                      width={30}
-                      height={30}
-                      src={whatsapp_icon}
-                      alt="Whatsapp"
-                    />
-                  </a>
+                </a>
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${article.title}&url=${window.location.href}`}
+                  target="_blank"
+                  title="Compartir en Twitter"
+                  rel="noreferrer"
+                >
+                  <img
+                    width={30}
+                    height={30}
+                    src={twitter_icon}
+                    alt="Twitter"
+                  />
+                </a>
+                <a
+                  href={`https://api.whatsapp.com/send?text=${window.location.href}`}
+                  target="_blank"
+                  title="Compartir en Whatsapp"
+                  rel="noreferrer"
+                >
+                  <img
+                    width={30}
+                    height={30}
+                    src={whatsapp_icon}
+                    alt="Whatsapp"
+                  />
                 </a>
               </div>
-              <time dateTime={dateTime}>{dateTimeString}</time>
-              <p>{article.lead}</p>
+              <time className="article-time" dateTime={dateTime}>{dateTimeString}</time>
+              <p className="lead-article">{article.lead}</p>
               <img
                 className="news-img news-img-bigger"
                 src={article.image}

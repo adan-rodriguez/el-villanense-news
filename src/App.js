@@ -4,30 +4,35 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./Layout";
 import Admin from "./pages/Admin";
 import LoginPage from "./pages/LoginPage";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import app from "./firebase/firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(false);
 
   const auth = getAuth(app);
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      setUser(user);
+      setUser(true);
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       //   const uid = user.uid;
       // ...
     } else {
-      setUser(null);
+      setUser(false);
     }
   });
   
+  // no me funciona este código
+  // useEffect(() => {
+  //   return () => signOut(auth);
+  // }, []);
+
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout user={user} />}>
         <Route index element={<NewsList />} />
         <Route
           path="login"

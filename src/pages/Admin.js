@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import app, { db } from "../firebase/firebase";
+import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import Tiny from "../utils/tiny";
-import { getAuth, signOut } from "firebase/auth";
 
 const Admin = () => {
   const [article, setArticle] = useState({
@@ -11,7 +10,7 @@ const Admin = () => {
     image: "",
     timestamp: "",
     lead: "",
-    section: "",
+    section: "locales",
     content: "",
   });
 
@@ -46,18 +45,7 @@ const Admin = () => {
       content: content,
     });
   };
-
-  const auth = getAuth(app);
-
-  const logout = () => {
-    signOut(auth).then(() => {
-      /*Sign-out successful.*/
-      navigate("/login");
-    });
-    // .catch((error) => {
-    //   /*An error happened.*/
-    // });
-  };
+  console.log(article);
 
   return (
     <div>
@@ -130,7 +118,6 @@ const Admin = () => {
             value={article.section}
             onChange={handleChange}
           >
-            <option>-- Seleccione la sección --</option>
             <option value="locales">Locales</option>
             <option value="regionales">Regionales</option>
             <option value="provinciales">Provinciales</option>
@@ -161,7 +148,6 @@ const Admin = () => {
           Subir artículo
         </button>
       </form>
-      <button onClick={logout}>Cerrar sesión</button>
     </div>
   );
 };

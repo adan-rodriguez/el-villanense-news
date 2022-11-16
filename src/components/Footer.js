@@ -1,12 +1,30 @@
+import { getAuth, signOut } from "firebase/auth";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import app from "../firebase/firebase";
 import Logo from "./Logo";
 import SocialMedia from "./SocialMedia";
 
-const Footer = () => {
+const Footer = ({ user }) => {
+  const auth = getAuth(app);
+
+  const navigate = useNavigate();
+
+  const logout = () => {
+    signOut(auth).then(() => {
+      /*Sign-out successful.*/
+      navigate("/login");
+    });
+    // .catch((error) => {
+    //   /*An error happened.*/
+    // });
+  };
+
   return (
     <footer className="footer">
+      {user && <button onClick={logout}>Cerrar sesión</button>}
       <SocialMedia className="social-footer" />
-        <Logo className="logo" />
+      <Logo className="logo" />
       <address className="address-footer">
         <ul>
           <li>
