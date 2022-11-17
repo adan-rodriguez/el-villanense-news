@@ -1,13 +1,11 @@
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import app from "../firebase/firebase";
+import { auth } from "../firebase/firebase";
 import Logo from "./Logo";
 import SocialMedia from "./SocialMedia";
 
 const Footer = ({ user }) => {
-  const auth = getAuth(app);
-
   const navigate = useNavigate();
 
   const logout = () => {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NewsItem from "../components/NewsItem";
 import { db } from "../firebase/firebase";
-import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { Helmet } from "react-helmet-async";
 
 const NewsList = () => {
@@ -19,7 +19,7 @@ const NewsList = () => {
       ? setNews(articles.filter((article) => article.section === section))
       : setNews(articles);
   };
-  
+
   useEffect(() => {
     getNews();
     window.scrollTo(0, 0);
@@ -28,15 +28,17 @@ const NewsList = () => {
   return (
     <>
       <Helmet>
-        <title>El Villanense</title>
-        <meta name="description" content="Helmet application" />
+        <title>El Villanense - Noticias de Villa Ana</title>
+        <meta
+          name="description"
+          content="Todas las noticias de Villa Ana y las noticias más importantes de la región, de la provincia de Santa Fe, de la Argentina y del mundo."
+        />
       </Helmet>
       <div className="news-container">
         {news.map((article) => {
           return (
             <NewsItem
               key={article.id}
-              id={article.id}
               image={article.image}
               timestamp={article.timestamp}
               title={article.title}

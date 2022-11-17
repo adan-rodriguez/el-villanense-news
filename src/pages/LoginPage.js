@@ -1,10 +1,9 @@
-import app from "../firebase/firebase";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase/firebase";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const auth = getAuth(app);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +34,9 @@ const LoginPage = () => {
         <label htmlFor="password">Contraseña</label>
         <input type="password" name="password" id="password" required />
       </div>
-      <button className="btn-login" type="submit">Ingresar</button>
+      <button className="btn-login" type="submit">
+        Ingresar
+      </button>
     </form>
   );
 };

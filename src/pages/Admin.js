@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
-import Tiny from "../utils/tiny";
+import TinyMCE from "../components/TinyMCE";
 
 const Admin = () => {
   const [article, setArticle] = useState({
@@ -16,7 +16,7 @@ const Admin = () => {
 
   const navigate = useNavigate();
 
-  const newsCollection = collection(db, "articles");
+  const articlesCollection = collection(db, "articles");
 
   const setTimestamp = () => {
     setArticle({
@@ -28,7 +28,7 @@ const Admin = () => {
   const addArticle = async (e) => {
     e.preventDefault();
 
-    await addDoc(newsCollection, article);
+    await addDoc(articlesCollection, article);
     navigate("/");
   };
 
@@ -101,15 +101,6 @@ const Admin = () => {
         </div>
         <div>
           <label htmlFor="section">Sección</label>
-          {/* <input
-            type="text"
-            name="section"
-            id="section"
-            placeholder="Sección"
-            required
-            value={article.section}
-            onChange={handleChange}
-          /> */}
           <select
             name="section"
             id="section"
@@ -138,7 +129,7 @@ const Admin = () => {
           ></textarea>
         </div> */}
         {/* <textarea name="content" id="mytextarea">Hello, World!</textarea> */}
-        <Tiny get={getContentTiny} />
+        <TinyMCE get={getContentTiny} />
         <button
           onClick={setTimestamp}
           className="btn-upload-article"

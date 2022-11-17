@@ -2,21 +2,17 @@ import React, { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { useEffect } from "react";
 
-const Tiny = ({ get }) => {
+const TinyMCE = ({ getContent }) => {
   const [value, setValue] = useState("");
-//   const editorRef = useRef(null);
+  //   const editorRef = useRef(null);
   //   const log = () => {
   //     if (editorRef.current) {
   //       console.log(editorRef.current.getContent());
   //     }
   //   };
 
-//   const handleEditorChange = (newValue) => {
-//     setValue(newValue);
-//   };
-
   useEffect(() => {
-    get(value);
+    getContent(value);
   }, [value]);
 
   return (
@@ -26,9 +22,7 @@ const Tiny = ({ get }) => {
         // onInit={(evt, editor) => (editorRef.current = editor)}
         // initialValue="<p>This is the initial content of the editor.</p>"
         value={value}
-        // onEditorChange={(newValue) => setValue(newValue)}
         onEditorChange={(newValue) => setValue(newValue)}
-        // onEditorChange={handleEditorChange}
         init={{
           height: 500,
           menubar: true,
@@ -66,7 +60,7 @@ const Tiny = ({ get }) => {
   );
 };
 
-export default Tiny;
+export default TinyMCE;
 
 // tinymce.init({
 //     selector: '#mytextarea',

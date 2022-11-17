@@ -4,14 +4,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./Layout";
 import Admin from "./pages/Admin";
 import LoginPage from "./pages/LoginPage";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import app from "./firebase/firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { auth } from "./firebase/firebase";
 
 const App = () => {
   const [user, setUser] = useState(false);
-
-  const auth = getAuth(app);
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -24,7 +22,7 @@ const App = () => {
       setUser(false);
     }
   });
-  
+
   // no me funciona este código
   // useEffect(() => {
   //   return () => signOut(auth);
