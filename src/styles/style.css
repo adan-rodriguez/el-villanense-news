@@ -239,6 +239,11 @@ button {
   font-size: 1rem;
 }
 
+.login-error-message {
+  text-align: center;
+  color: red;
+}
+
 /*------------------ Admin --------------------*/
 
 .title-new-article {
