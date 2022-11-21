@@ -43,7 +43,7 @@ const App = () => {
           element={user ? <Admin /> : <Navigate to="/login" replace={true} />}
         />
         <Route path=":section" element={<NewsList />} />
-        <Route path=":section/:titleUrl" element={<News />} />
+        <Route path=":section/:titleFriendlyUrl" element={<News />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Route>
     </Routes>

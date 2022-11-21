@@ -1,18 +1,16 @@
 import { signOut } from "firebase/auth";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/firebase";
 import Logo from "./Logo";
 import SocialMedia from "./SocialMedia";
 
 const Footer = ({ user }) => {
-  const navigate = useNavigate();
 
   const logout = () => {
-    signOut(auth).then(() => {
-      /*Sign-out successful.*/
-      navigate("/login");
-    });
+    signOut(auth);
+    // .then(() => {
+    //   /*Sign-out successful.*/
+    // });
     // .catch((error) => {
     //   /*An error happened.*/
     // });
@@ -27,12 +25,12 @@ const Footer = ({ user }) => {
         <ul>
           <li>
             Correo:{" "}
-            <a href="mailto:redaccion@elvillanense.com.ar">
+            <a href="mailto:redaccion@elvillanense.com.ar" rel="noreferrer">
               redaccion@elvillanense.com.ar
             </a>
           </li>
           <li>
-            Teléfono: <a href="tel:+5493482524950">+54 9 3482 524950</a>
+            Teléfono: <a href="tel:+5493482524950" rel="noreferrer">+54 9 3482 524950</a>
           </li>
           <li>Villa Ana - Santa Fe - Argentina</li>
         </ul>

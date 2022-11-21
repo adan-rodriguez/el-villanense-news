@@ -1,4 +1,4 @@
-const getDatetime = (timestamp) => {
+const timestampToDatetime = (timestamp) => {
   const datetime = new Date(timestamp);
 
   const [year, month, weekDay, day, hour, minutes] = [
@@ -46,15 +46,15 @@ const getDatetime = (timestamp) => {
   const monthString = getMonth(month);
 
   const objectDatetime = {
-    dateTime: `${year}-${String(month).length === 1 ? 0 : ""}${month}-${
-      String(day).length === 1 ? 0 : ""
-    }${day}T${String(hour).length === 1 ? 0 : ""}${hour}:${
-      String(minutes).length === 1 ? 0 : ""
-    }${minutes}-03:00`,
-    date: `${
+    datetimeAttribute: `${year}-${
+      String(month).length === 1 ? 0 : ""
+    }${month}-${String(day).length === 1 ? 0 : ""}${day}T${
+      String(hour).length === 1 ? 0 : ""
+    }${hour}:${String(minutes).length === 1 ? 0 : ""}${minutes}-03:00`,
+    dateContent: `${
       String(day).length === 1 ? 0 : ""
     }${day} de ${monthString} de ${year}`,
-    dateTimeString: `${
+    datetimeContent: `${
       String(day).length === 1 ? 0 : ""
     }${day} de ${monthString} de ${year} - ${
       String(hour).length === 1 ? 0 : ""
@@ -64,4 +64,4 @@ const getDatetime = (timestamp) => {
   return objectDatetime;
 };
 
-export default getDatetime;
+export default timestampToDatetime;

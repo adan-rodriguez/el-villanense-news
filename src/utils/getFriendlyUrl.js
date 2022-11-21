@@ -11,12 +11,12 @@
 //     .join("-");
 // };
 
-const stringUrl = (string) => {
+const getFriendlyUrl = (string) => {
   // Definimos los caracteres que queremos eliminar
-  var specialChars = '¡!@#$^&%*()+=-[]/{}|:<>¿?,;._"ºª·~€`´¨';
+  let specialChars = '¡!@#$^&%*()+=-[]/{}|:<>¿?,;._"ºª·~€`´¨';
 
   // Los eliminamos todos
-  for (var i = 0; i < specialChars.length; i++) {
+  for (let i = 0; i < specialChars.length; i++) {
     string = string.replace(new RegExp("\\" + specialChars[i], "gi"), "");
   }
 
@@ -33,7 +33,23 @@ const stringUrl = (string) => {
   string = string.replace(/ó/g, "o");
   string = string.replace(/ú/g, "u");
   string = string.replace(/ñ/g, "n");
-  return string;
+
+  const friendlyUrl = string;
+  return friendlyUrl;
 };
 
-export default stringUrl;
+export default getFriendlyUrl;
+
+const miFuncion = (string) => {
+  string
+    .replace(/\s/g, "_")
+    .toLowerCase()
+    .replace(/á/g, "a")
+    .replace(/é/g, "e")
+    .replace(/í/g, "i")
+    .replace(/ó/g, "o")
+    .replace(/ú/g, "u")
+    .replace(/ñ/g, "n")
+    .replace(/\W/g, "")
+    .replace(/_/g, "-");
+};

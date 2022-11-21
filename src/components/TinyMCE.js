@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { useEffect } from "react";
 
-const TinyMCE = ({ getContent }) => {
+const TinyMCE = ({ get }) => {
   const [value, setValue] = useState("");
   //   const editorRef = useRef(null);
   //   const log = () => {
@@ -12,7 +12,7 @@ const TinyMCE = ({ getContent }) => {
   //   };
 
   useEffect(() => {
-    getContent(value);
+    get(value);
   }, [value]);
 
   return (

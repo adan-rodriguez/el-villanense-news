@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import getDatetime from "../utils/datetime";
-import stringUrl from "../utils/stringUrl";
+import timestampToDatetime from "../utils/timestampToDatetime";
 import { Helmet } from "react-helmet-async";
+import getFriendlyUrl from "../utils/getFriendlyUrl";
 
 const News = () => {
   const [news, setNews] = useState([]);
 
-  const { titleUrl } = useParams();
+  const { titleFriendlyUrl } = useParams();
 
   const articlesCollection = collection(db, "articles");
 
@@ -20,7 +20,7 @@ const News = () => {
     const data = await getDocs(articlesCollection);
     const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     const article = articles.filter(
-      (article) => stringUrl(article.title) === titleUrl
+      (article) => getFriendlyUrl(article.title) === titleFriendlyUrl
     );
     setNews(article);
   };
@@ -36,7 +36,9 @@ const News = () => {
         function createMarkup() {
           return { __html: article.content };
         }
-        const { dateTime, dateTimeString } = getDatetime(article.timestamp);
+        const { datetimeAttribute, datetimeContent } = timestampToDatetime(
+          article.timestamp
+        );
         return (
           <article key={article.id} className="article-container">
             <Helmet>
@@ -88,8 +90,8 @@ const News = () => {
                 />
               </a>
             </div>
-            <time className="article-time" dateTime={dateTime}>
-              {dateTimeString}
+            <time className="article-time" dateTime={datetimeAttribute}>
+              {datetimeContent}
             </time>
             <p className="lead-article">{article.lead}</p>
             <img
