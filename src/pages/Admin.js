@@ -14,23 +14,17 @@ const Admin = () => {
     content: "",
   });
 
+  // // TODO: Segun midudev se debería hacer así para hacer nuestro código más legible y siempre actualizar sólo la parte que toca
+  // const [title, setTitle] = useState()
+  // const [image, setImage] = useState()
+  // const [timestamp, setTimestamp] = useState()
+  // const [lead, setLead] = useState()
+  // const [section, setSection] = useState("locales")
+  // const [content, setContent] = useState()
+
   const navigate = useNavigate();
 
   const articlesCollection = collection(db, "articles");
-
-  const setTimestamp = () => {
-    setArticle({
-      ...article,
-      timestamp: Date.now(),
-    });
-  };
-
-  const addArticle = async (e) => {
-    e.preventDefault();
-
-    await addDoc(articlesCollection, article);
-    navigate("/");
-  };
 
   const handleChange = (e) => {
     setArticle({
@@ -44,6 +38,21 @@ const Admin = () => {
       ...article,
       content: content,
     });
+  };
+
+  const setTimestamp = () => {
+    // TODO: que es e.timeStamp? no da el mismo número que Date.now()
+    setArticle({
+      ...article,
+      timestamp: Date.now(),
+    });
+  };
+
+  const addArticle = async (e) => {
+    e.preventDefault();
+
+    await addDoc(articlesCollection, article);
+    navigate("/");
   };
 
   return (

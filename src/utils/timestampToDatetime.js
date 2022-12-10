@@ -1,10 +1,10 @@
 const timestampToDatetime = (timestamp) => {
   const datetime = new Date(timestamp);
 
-  const [year, month, weekDay, day, hour, minutes] = [
+  const [year, month /*, weekDay*/, day, hour, minutes] = [
     datetime.getFullYear(),
     datetime.getMonth(),
-    datetime.getDay(),
+    // datetime.getDay(),
     datetime.getDate(),
     datetime.getHours(),
     datetime.getMinutes(),
