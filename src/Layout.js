@@ -1,9 +1,9 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
+import PropTypes from "prop-types";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
-const Layout = ({ user }) => {
+function Layout({ user }) {
   return (
     <>
       <Header />
@@ -13,6 +13,10 @@ const Layout = ({ user }) => {
       <Footer user={user} />
     </>
   );
+}
+
+Layout.propTypes = {
+  user: PropTypes.bool.isRequired,
 };
 
 export default Layout;

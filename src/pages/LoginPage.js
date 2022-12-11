@@ -1,13 +1,12 @@
 import {
-  browserSessionPersistence,
-  setPersistence,
+  /* browserSessionPersistence, */
+  /* setPersistence, */
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebase";
 
-const LoginPage = () => {
+function LoginPage() {
   const [loginErrorMessage, setLoginErrorMessage] = useState(false);
 
   const handleSubmit = (e) => {
@@ -24,11 +23,12 @@ const LoginPage = () => {
       //   }
       // );
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.log(error);
-        console.dir(error);
-        console.log("Nombre del error: ", error.name);
-        console.log("Código del error: ", error.code);
-        console.log("Mensaje de error: ", error.message);
+        // console.dir(error);
+        // console.log("Nombre del error: ", error.name);
+        // console.log("Código del error: ", error.code);
+        // console.log("Mensaje de error: ", error.message);
         setLoginErrorMessage(true);
       });
 
@@ -58,12 +58,16 @@ const LoginPage = () => {
     <>
       <form className="form-login" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email</label>
-          <input type="text" name="email" id="email" required />
+          <label htmlFor="email">
+            Email
+            <input type="text" name="email" id="email" required />
+          </label>
         </div>
         <div>
-          <label htmlFor="password">Contraseña</label>
-          <input type="password" name="password" id="password" required />
+          <label htmlFor="password">
+            Contraseña
+            <input type="password" name="password" id="password" required />
+          </label>
         </div>
         <button className="btn-login" type="submit">
           Ingresar
@@ -74,6 +78,6 @@ const LoginPage = () => {
       </p>
     </>
   );
-};
+}
 
 export default LoginPage;

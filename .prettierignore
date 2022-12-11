@@ -1,0 +1,20 @@
+# By default prettier ignores files in version control systems directories (".git", ".svn" and ".hg") and node_modules (if --with-node-modules CLI option not specified)
+
+# So by default it will be
+
+# **/.git
+# **/.svn
+# **/.hg
+# **/node_modules
+
+# and
+
+# **/.git
+# **/.svn
+# **/.hg
+# if --with-node-modules CLI option provided
+
+# (See also the --ignore-path CLI option.)
+
+build
+coverage

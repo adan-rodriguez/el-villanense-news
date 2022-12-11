@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import menu_icon from "../assets/images/menu-icon.svg";
-import close_icon from "../assets/images/close-icon.svg";
 import { Link } from "react-router-dom";
+import menuIcon from "../assets/images/menu-icon.svg";
+import closeIcon from "../assets/images/close-icon.svg";
 import Logo from "./Logo";
 import SocialMedia from "./SocialMedia";
 
-const Header = () => {
+function Header() {
   const [menuopen, setMenuopen] = useState(false);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
 
@@ -31,19 +31,21 @@ const Header = () => {
       <div className="top-header-container">
         <Logo className="logo logo-top" />
         <button
+          type="button"
           onClick={() => setMenuopen(!menuopen)}
           className="open-menu"
           aria-label="Abrir menú"
         >
-          <img src={menu_icon} alt="Abrir menú" />
+          <img src={menuIcon} alt="Abrir menú" />
         </button>
         <div className="top-navbar">
           <button
+            type="button"
             onClick={() => setMenuopen(!menuopen)}
             className="close-menu"
             aria-label="Cerrar menú"
           >
-            <img src={close_icon} alt="Cerrar menú" />
+            <img src={closeIcon} alt="Cerrar menú" />
           </button>
           <nav>
             <ul>
@@ -114,6 +116,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+}
 
 export default Header;

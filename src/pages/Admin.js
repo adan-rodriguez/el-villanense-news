@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 import TinyMCE from "../components/TinyMCE";
 
-const Admin = () => {
+function Admin() {
   const [article, setArticle] = useState({
     title: "",
     image: "",
@@ -36,7 +36,7 @@ const Admin = () => {
   const getContentTiny = async (content) => {
     setArticle({
       ...article,
-      content: content,
+      content,
     });
   };
 
@@ -60,28 +60,32 @@ const Admin = () => {
       <h1 className="title-new-article">Nuevo artículo</h1>
       <form className="form-add-article" onSubmit={addArticle}>
         <div>
-          <label htmlFor="title">Título</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="Título"
-            required
-            value={article.title}
-            onChange={handleChange}
-          />
+          <label htmlFor="title">
+            Título
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Título"
+              required
+              value={article.title}
+              onChange={handleChange}
+            />
+          </label>
         </div>
         <div>
-          <label htmlFor="image">Imagen</label>
-          <input
-            type="text"
-            name="image"
-            id="image"
-            placeholder="URL Imagen"
-            required
-            value={article.image}
-            onChange={handleChange}
-          />
+          <label htmlFor="image">
+            Imagen
+            <input
+              type="text"
+              name="image"
+              id="image"
+              placeholder="URL Imagen"
+              required
+              value={article.image}
+              onChange={handleChange}
+            />
+          </label>
         </div>
         {/* <div>
           <label htmlFor="datetime">Fecha y hora</label>
@@ -96,33 +100,37 @@ const Admin = () => {
           />
         </div> */}
         <div>
-          <label htmlFor="lead">Entrada</label>
-          <textarea
-            type="text"
-            name="lead"
-            id="lead"
-            placeholder="Entrada"
-            required
-            value={article.lead}
-            onChange={handleChange}
-            rows="4"
-          ></textarea>
+          <label htmlFor="lead">
+            Entrada
+            <textarea
+              type="text"
+              name="lead"
+              id="lead"
+              placeholder="Entrada"
+              required
+              value={article.lead}
+              onChange={handleChange}
+              rows="4"
+            />
+          </label>
         </div>
         <div>
-          <label htmlFor="section">Sección</label>
-          <select
-            name="section"
-            id="section"
-            required
-            value={article.section}
-            onChange={handleChange}
-          >
-            <option value="locales">Locales</option>
-            <option value="regionales">Regionales</option>
-            <option value="provinciales">Provinciales</option>
-            <option value="nacionales">Nacionales</option>
-            <option value="internacionales">Internacionales</option>
-          </select>
+          <label htmlFor="section">
+            Sección
+            <select
+              name="section"
+              id="section"
+              required
+              value={article.section}
+              onChange={handleChange}
+            >
+              <option value="locales">Locales</option>
+              <option value="regionales">Regionales</option>
+              <option value="provinciales">Provinciales</option>
+              <option value="nacionales">Nacionales</option>
+              <option value="internacionales">Internacionales</option>
+            </select>
+          </label>
         </div>
         {/* <div>
           <label htmlFor="content">Cuerpo</label>
@@ -149,6 +157,6 @@ const Admin = () => {
       </form>
     </div>
   );
-};
+}
 
 export default Admin;

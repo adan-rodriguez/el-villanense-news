@@ -1,32 +1,32 @@
-import facebook_icon from "../assets/images/facebook.png";
-import twitter_icon from "../assets/images/twitter.png";
-import whatsapp_icon from "../assets/images/whatsapp.png";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { db } from "../firebase/firebase";
 import { collection, getDocs, query } from "firebase/firestore";
-import timestampToDatetime from "../utils/timestampToDatetime";
 import { Helmet } from "react-helmet-async";
+import facebookIcon from "../assets/images/facebook.png";
+import twitterIcon from "../assets/images/twitter.png";
+import whatsappIcon from "../assets/images/whatsapp.png";
+import { db } from "../firebase/firebase";
+import timestampToDatetime from "../utils/timestampToDatetime";
 
-const News = () => {
-  const { id } = useParams();
+function News() {
+  const { titleFriendlyParam } = useParams();
+  const idParam = titleFriendlyParam.slice(-20);
 
-  const getNewsFromLocalStorage = (id) => {
-    return JSON.parse(localStorage.getItem(id));
-  };
+  const getNewsFromLocalStorage = (key) =>
+    JSON.parse(localStorage.getItem(key));
 
   const sendNewsToLocalStorage = (article) => {
     localStorage.setItem(article.id, JSON.stringify(article));
   };
 
-  const getNewsFromSessionStorage = (id) => {
-    const article = JSON.parse(sessionStorage.getItem(id));
+  const getNewsFromSessionStorage = (key) => {
+    const article = JSON.parse(sessionStorage.getItem(key));
     sendNewsToLocalStorage(article);
     return article;
   };
 
   const [news, setNews] = useState(
-    getNewsFromLocalStorage(id) ?? getNewsFromSessionStorage(id)
+    getNewsFromLocalStorage(idParam) ?? getNewsFromSessionStorage(idParam)
   );
 
   const getNewsFromFirebase = async () => {
@@ -34,11 +34,17 @@ const News = () => {
     const q = query(articlesCollection);
     const data = await getDocs(q);
     const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    const article = articles.filter((article) => article.id === id);
-    setNews({ ...article[0], ...timestampToDatetime(article[0].timestamp) });
+    // const article = articles.filter((article) => article.id === idParam);
+    // setNews({ ...article[0], ...timestampToDatetime(article[0].timestamp) });
+    // sendNewsToLocalStorage({
+    //   ...article[0],
+    //   ...timestampToDatetime(article[0].timestamp),
+    // });
+    const article = articles.find((art) => art.id === idParam);
+    setNews({ article, ...timestampToDatetime(article.timestamp) });
     sendNewsToLocalStorage({
-      ...article[0],
-      ...timestampToDatetime(article[0].timestamp),
+      article,
+      ...timestampToDatetime(article.timestamp),
     });
   };
 
@@ -80,7 +86,7 @@ const News = () => {
             title="Compartir en Facebook"
             rel="noreferrer"
           >
-            <img width={30} height={30} src={facebook_icon} alt="Facebook" />
+            <img width={30} height={30} src={facebookIcon} alt="Facebook" />
           </a>
           <a
             href={`https://twitter.com/intent/tweet?text=${news.title}&url=${window.location.href}`}
@@ -88,7 +94,7 @@ const News = () => {
             title="Compartir en Twitter"
             rel="noreferrer"
           >
-            <img width={30} height={30} src={twitter_icon} alt="Twitter" />
+            <img width={30} height={30} src={twitterIcon} alt="Twitter" />
           </a>
           <a
             href={`https://api.whatsapp.com/send?text=${window.location.href}`}
@@ -96,7 +102,7 @@ const News = () => {
             title="Compartir en Whatsapp"
             rel="noreferrer"
           >
-            <img width={30} height={30} src={whatsapp_icon} alt="Whatsapp" />
+            <img width={30} height={30} src={whatsappIcon} alt="Whatsapp" />
           </a>
         </div>
         <time className="article-time" dateTime={news.datetimeAttribute}>
@@ -112,10 +118,10 @@ const News = () => {
         <div
           dangerouslySetInnerHTML={createMarkup()}
           className="content-article"
-        ></div>
+        />
       </article>
     </div>
   );
-};
+}
 
 export default News;

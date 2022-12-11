@@ -1,25 +1,25 @@
+import { Routes, Route, Navigate } from "react-router-dom";
+import { onAuthStateChanged /* signOut */ } from "firebase/auth";
+import { /* useEffect, */ useState } from "react";
 import NewsList from "./pages/NewsList";
 import News from "./pages/News";
-import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./Layout";
 import Admin from "./pages/Admin";
 import LoginPage from "./pages/LoginPage";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
 import { auth } from "./firebase/firebase";
 
-const App = () => {
-  const [user, setUser] = useState(false);
+function App() {
+  const [isUserLogged, setIsUserLogged] = useState(false);
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      setUser(true);
+      setIsUserLogged(true);
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       //   const uid = user.uid;
       // ...
     } else {
-      setUser(false);
+      setIsUserLogged(false);
     }
   });
 
@@ -30,25 +30,25 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout user={user} />}>
+      <Route path="/" element={<Layout user={isUserLogged} />}>
         <Route index element={<NewsList />} />
         <Route
           path="login"
           element={
-            user ? <Navigate to="/admin" replace={true} /> : <LoginPage />
+            isUserLogged ? <Navigate to="/admin" replace /> : <LoginPage />
           }
         />
         <Route
           path="admin"
-          element={user ? <Admin /> : <Navigate to="/login" replace={true} />}
+          element={isUserLogged ? <Admin /> : <Navigate to="/login" replace />}
         />
         <Route path=":section" element={<NewsList />} />
-        {/* <Route path=":section/:titleFriendlyUrl" element={<News />} /> */}
-        <Route path=":section/:id" element={<News />} />
+        <Route path=":section/:titleFriendlyUrl" element={<News />} />
+        {/* <Route path=":section/:id" element={<News />} /> */}
         <Route path="*" element={<div>Not Found</div>} />
       </Route>
     </Routes>
   );
-};
+}
 
 export default App;

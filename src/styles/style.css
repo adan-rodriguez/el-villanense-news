@@ -167,7 +167,7 @@ button {
 }
 
 .news-link:hover .news-title {
-  transition: .3s;
+  transition: 0.3s;
   color: #0289cb;
 }
 

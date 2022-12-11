@@ -1,11 +1,10 @@
+import PropTypes from "prop-types";
 import { signOut } from "firebase/auth";
-import React from "react";
 import { auth } from "../firebase/firebase";
 import Logo from "./Logo";
 import SocialMedia from "./SocialMedia";
 
-const Footer = ({ user }) => {
-
+function Footer({ user }) {
   const logout = () => {
     signOut(auth);
     // .then(() => {
@@ -18,7 +17,11 @@ const Footer = ({ user }) => {
 
   return (
     <footer className="footer">
-      {user && <button onClick={logout}>Cerrar sesión</button>}
+      {user && (
+        <button onClick={logout} type="button">
+          Cerrar sesión
+        </button>
+      )}
       <SocialMedia className="social-footer" />
       <Logo className="logo" />
       <address className="address-footer">
@@ -30,7 +33,10 @@ const Footer = ({ user }) => {
             </a>
           </li>
           <li>
-            Teléfono: <a href="tel:+5493482524950" rel="noreferrer">+54 9 3482 524950</a>
+            Teléfono:{" "}
+            <a href="tel:+5493482524950" rel="noreferrer">
+              +54 9 3482 524950
+            </a>
           </li>
           <li>Villa Ana - Santa Fe - Argentina</li>
         </ul>
@@ -40,6 +46,10 @@ const Footer = ({ user }) => {
       </p>
     </footer>
   );
+}
+
+Footer.propTypes = {
+  user: PropTypes.bool.isRequired,
 };
 
 export default Footer;

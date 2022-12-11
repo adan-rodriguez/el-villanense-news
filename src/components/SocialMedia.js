@@ -1,9 +1,9 @@
-import React from "react";
-import facebook_icon from "../assets/images/facebook.png";
-import instagram_icon from "../assets/images/instagram.png";
-import twitter_icon from "../assets/images/twitter.png";
+import PropTypes from "prop-types";
+import facebookIcon from "../assets/images/facebook.png";
+import instagramIcon from "../assets/images/instagram.png";
+import twitterIcon from "../assets/images/twitter.png";
 
-const SocialMedia = ({ className }) => {
+function SocialMedia({ className }) {
   return (
     <div className={className}>
       <a
@@ -15,7 +15,7 @@ const SocialMedia = ({ className }) => {
         <img
           width={30}
           height={30}
-          src={facebook_icon}
+          src={facebookIcon}
           alt="Facebook"
           loading="lazy"
         />
@@ -29,7 +29,7 @@ const SocialMedia = ({ className }) => {
         <img
           width={30}
           height={30}
-          src={instagram_icon}
+          src={instagramIcon}
           alt="Instagram"
           loading="lazy"
         />
@@ -43,13 +43,17 @@ const SocialMedia = ({ className }) => {
         <img
           width={30}
           height={30}
-          src={twitter_icon}
+          src={twitterIcon}
           alt="Twitter"
           loading="lazy"
         />
       </a>
     </div>
   );
+}
+
+SocialMedia.propTypes = {
+  className: PropTypes.string.isRequired,
 };
 
 export default SocialMedia;

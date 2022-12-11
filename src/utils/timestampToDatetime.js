@@ -1,7 +1,7 @@
 const timestampToDatetime = (timestamp) => {
   const datetime = new Date(timestamp);
 
-  const [year, month /*, weekDay*/, day, hour, minutes] = [
+  const [year, month /* , weekDay */, day, hour, minutes] = [
     datetime.getFullYear(),
     datetime.getMonth(),
     // datetime.getDay(),
@@ -25,8 +25,8 @@ const timestampToDatetime = (timestamp) => {
 
   //   const weekDayString = getWeekDay(weekDay);
 
-  const getMonth = (month) => {
-    let months = [
+  const getMonth = (n) => {
+    const months = [
       "Enero",
       "Febrero",
       "Marzo",
@@ -40,7 +40,7 @@ const timestampToDatetime = (timestamp) => {
       "Noviembre",
       "Diciembre",
     ];
-    return months[month];
+    return months[n];
   };
 
   const monthString = getMonth(month);

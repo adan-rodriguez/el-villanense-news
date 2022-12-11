@@ -1,15 +1,16 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import timestampToDatetime from "../utils/timestampToDatetime";
 import getFriendlyUrl from "../utils/getFriendlyUrl";
 
-const NewsItem = ({ image, timestamp, title, section, id }) => {
+function NewsItem({ image, timestamp, title, section, id }) {
   const { datetimeAttribute, dateContent } = timestampToDatetime(timestamp);
 
-  // let titleFriendlyUrl = getFriendlyUrl(title);
+  const titleFriendlyUrl = getFriendlyUrl(title);
 
   return (
     // <Link className="news-link" to={`/${section}/${titleFriendlyUrl}`}>
-    <Link className="news-link" to={`/${section}/${id}`}>
+    <Link className="news-link" to={`/${section}/${titleFriendlyUrl}${id}`}>
       <article>
         {/* Agregar en Admin un input para introducir el texto alternativo de la imagen */}
         <img className="news-img" src={image} alt={title} loading="lazy" />
@@ -20,6 +21,14 @@ const NewsItem = ({ image, timestamp, title, section, id }) => {
       </article>
     </Link>
   );
+}
+
+NewsItem.propTypes = {
+  image: PropTypes.string.isRequired,
+  timestamp: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  section: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default NewsItem;

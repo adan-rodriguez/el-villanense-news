@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import NewsItem from "../components/NewsItem";
-import { db } from "../firebase/firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { Helmet } from "react-helmet-async";
+import NewsItem from "../components/NewsItem";
+import { db } from "../firebase/firebase";
 import timestampToDatetime from "../utils/timestampToDatetime";
 
-const NewsList = () => {
+function NewsList() {
   const { section } = useParams();
 
   const getNewsFromSessionStorage = () => {
     const articles = [];
-    let keys = Object.keys(sessionStorage);
+    const keys = Object.keys(sessionStorage);
     if (keys.length !== 0) {
-      for (let key of keys) {
-        let article = JSON.parse(sessionStorage.getItem(key));
+      keys.forEach((key) => {
+        const article = JSON.parse(sessionStorage.getItem(key));
         articles.push(article);
-      }
+      });
     }
-    articles.sort(function (a, b) {
+    articles.sort((a, b) => {
       if (a.timestamp < b.timestamp) {
         return 1;
       }
@@ -89,21 +89,19 @@ const NewsList = () => {
         />
       </Helmet>
       <div className="news-container">
-        {news.map((article) => {
-          return (
-            <NewsItem
-              key={article.id}
-              id={article.id}
-              image={article.image}
-              timestamp={article.timestamp}
-              title={article.title}
-              section={article.section}
-            />
-          );
-        })}
+        {news.map((article) => (
+          <NewsItem
+            key={article.id}
+            id={article.id}
+            image={article.image}
+            timestamp={article.timestamp}
+            title={article.title}
+            section={article.section}
+          />
+        ))}
       </div>
     </>
   );
-};
+}
 
 export default NewsList;

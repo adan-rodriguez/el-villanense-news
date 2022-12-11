@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import { /* useRef */ useState, useEffect } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { useEffect } from "react";
 
-const TinyMCE = ({ get }) => {
+// eslint-disable-next-line react/prop-types
+function TinyMCE({ get }) {
   const [value, setValue] = useState("");
   //   const editorRef = useRef(null);
   //   const log = () => {
@@ -58,7 +58,7 @@ const TinyMCE = ({ get }) => {
       {/* <button onClick={log}>Log editor content</button> */}
     </>
   );
-};
+}
 
 export default TinyMCE;
 
