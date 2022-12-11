@@ -4,13 +4,48 @@ import NewsItem from "../components/NewsItem";
 import { db } from "../firebase/firebase";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { Helmet } from "react-helmet-async";
+import timestampToDatetime from "../utils/timestampToDatetime";
 
 const NewsList = () => {
-  const [news, setNews] = useState([]);
-
   const { section } = useParams();
 
-  const getNews = async () => {
+  const getNewsFromSessionStorage = () => {
+    const articles = [];
+    let keys = Object.keys(sessionStorage);
+    if (keys.length !== 0) {
+      for (let key of keys) {
+        let article = JSON.parse(sessionStorage.getItem(key));
+        articles.push(article);
+      }
+    }
+    articles.sort(function (a, b) {
+      if (a.timestamp < b.timestamp) {
+        return 1;
+      }
+      if (a.timestamp > b.timestamp) {
+        return -1;
+      }
+      return 0;
+    });
+
+    return articles;
+  };
+
+  const [news, setNews] = useState(getNewsFromSessionStorage());
+
+  const sendNewsToSessionStorage = (articles) => {
+    articles.forEach((article) =>
+      sessionStorage.setItem(
+        article.id,
+        JSON.stringify({
+          ...article,
+          ...timestampToDatetime(article.timestamp),
+        })
+      )
+    );
+  };
+
+  const getNewsFromFirebase = async () => {
     const articlesCollection = collection(db, "articles");
     const q = query(articlesCollection, orderBy("timestamp", "desc"));
     const data = await getDocs(q);
@@ -18,10 +53,25 @@ const NewsList = () => {
     section
       ? setNews(articles.filter((article) => article.section === section))
       : setNews(articles);
+    sendNewsToSessionStorage(articles);
+  };
+
+  const getSectionNewsFromSessionStorage = () => {
+    const articles = getNewsFromSessionStorage();
+    section
+      ? setNews(articles.filter((article) => article.section === section))
+      : setNews(articles);
   };
 
   useEffect(() => {
-    getNews();
+    if (!sessionStorage.length) {
+      getNewsFromFirebase();
+    }
+
+    if (sessionStorage.length !== 0) {
+      getSectionNewsFromSessionStorage();
+    }
+
     window.scrollTo(0, 0);
   }, [section]);
 

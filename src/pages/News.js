@@ -15,11 +15,19 @@ const News = () => {
     return JSON.parse(localStorage.getItem(id));
   };
 
-  const [news, setNews] = useState(getNewsFromLocalStorage(id));
-
   const sendNewsToLocalStorage = (article) => {
     localStorage.setItem(article.id, JSON.stringify(article));
   };
+
+  const getNewsFromSessionStorage = (id) => {
+    const article = JSON.parse(sessionStorage.getItem(id));
+    sendNewsToLocalStorage(article);
+    return article;
+  };
+
+  const [news, setNews] = useState(
+    getNewsFromLocalStorage(id) ?? getNewsFromSessionStorage(id)
+  );
 
   const getNewsFromFirebase = async () => {
     const articlesCollection = collection(db, "articles");

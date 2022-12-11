@@ -5,7 +5,7 @@ import getFriendlyUrl from "../utils/getFriendlyUrl";
 const NewsItem = ({ image, timestamp, title, section, id }) => {
   const { datetimeAttribute, dateContent } = timestampToDatetime(timestamp);
 
-  let titleFriendlyUrl = getFriendlyUrl(title);
+  // let titleFriendlyUrl = getFriendlyUrl(title);
 
   return (
     // <Link className="news-link" to={`/${section}/${titleFriendlyUrl}`}>
