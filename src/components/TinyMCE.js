@@ -1,8 +1,8 @@
+import PropTypes from "prop-types";
 import { /* useRef */ useState, useEffect } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-// eslint-disable-next-line react/prop-types
-function TinyMCE({ get }) {
+function TinyMCE({ getContent }) {
   const [value, setValue] = useState("");
   //   const editorRef = useRef(null);
   //   const log = () => {
@@ -12,7 +12,7 @@ function TinyMCE({ get }) {
   //   };
 
   useEffect(() => {
-    get(value);
+    getContent(value);
   }, [value]);
 
   return (
@@ -59,6 +59,10 @@ function TinyMCE({ get }) {
     </>
   );
 }
+
+TinyMCE.propTypes = {
+  getContent: PropTypes.func.isRequired,
+};
 
 export default TinyMCE;
 

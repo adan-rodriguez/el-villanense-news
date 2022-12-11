@@ -146,7 +146,7 @@ function Admin() {
           ></textarea>
         </div> */}
         {/* <textarea name="content" id="mytextarea">Hello, World!</textarea> */}
-        <TinyMCE get={getContentTiny} />
+        <TinyMCE getContent={getContentTiny} />
         <button
           onClick={setTimestamp}
           className="btn-upload-article"
