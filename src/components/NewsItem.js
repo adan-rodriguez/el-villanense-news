@@ -10,7 +10,7 @@ function NewsItem({ image, timestamp, title, section, id }) {
 
   return (
     // <Link className="news-link" to={`/${section}/${titleFriendlyUrl}`}>
-    <Link className="news-link" to={`/${section}/${titleFriendlyUrl}${id}`}>
+    <Link className="news-link" to={`/${section}/${titleFriendlyUrl}-${id}`}>
       <article>
         {/* Agregar en Admin un input para introducir el texto alternativo de la imagen */}
         <img className="news-img" src={image} alt={title} loading="lazy" />

@@ -9,8 +9,8 @@ import { db } from "../firebase/firebase";
 import timestampToDatetime from "../utils/timestampToDatetime";
 
 function News() {
-  const { titleFriendlyParam } = useParams();
-  const idParam = titleFriendlyParam.slice(-20);
+  const { titleFriendlyUrl } = useParams();
+  const id = titleFriendlyUrl.slice(-20);
 
   const getNewsFromLocalStorage = (key) =>
     JSON.parse(localStorage.getItem(key));
@@ -26,7 +26,7 @@ function News() {
   };
 
   const [news, setNews] = useState(
-    getNewsFromLocalStorage(idParam) ?? getNewsFromSessionStorage(idParam)
+    getNewsFromLocalStorage(id) ?? getNewsFromSessionStorage(id)
   );
 
   const getNewsFromFirebase = async () => {
@@ -40,7 +40,7 @@ function News() {
     //   ...article[0],
     //   ...timestampToDatetime(article[0].timestamp),
     // });
-    const article = articles.find((art) => art.id === idParam);
+    const article = articles.find((art) => art.id === id);
     setNews({ article, ...timestampToDatetime(article.timestamp) });
     sendNewsToLocalStorage({
       article,
