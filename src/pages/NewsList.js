@@ -25,6 +25,10 @@ const NewsList = () => {
     window.scrollTo(0, 0);
   }, [section]);
 
+  if (!news.length) {
+    return <div>Cargando...</div>;
+  }
+
   return (
     <>
       <Helmet>
@@ -39,6 +43,7 @@ const NewsList = () => {
           return (
             <NewsItem
               key={article.id}
+              id={article.id}
               image={article.image}
               timestamp={article.timestamp}
               title={article.title}
