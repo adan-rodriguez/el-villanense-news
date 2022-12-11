@@ -4,7 +4,7 @@ import whatsapp_icon from "../assets/images/whatsapp.png";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import timestampToDatetime from "../utils/timestampToDatetime";
 import { Helmet } from "react-helmet-async";
 
@@ -16,7 +16,6 @@ const News = () => {
   };
 
   const [news, setNews] = useState(getNewsFromLocalStorage(id));
-  console.log(news);
 
   const sendNewsToLocalStorage = (article) => {
     localStorage.setItem(article.id, JSON.stringify(article));
@@ -24,12 +23,10 @@ const News = () => {
 
   const getNewsFromFirebase = async () => {
     const articlesCollection = collection(db, "articles");
-    const data = await getDocs(articlesCollection);
-    console.log(data);
+    const q = query(articlesCollection);
+    const data = await getDocs(q);
     const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    console.log(articles);
     const article = articles.filter((article) => article.id === id);
-    console.log(article);
     setNews({ ...article[0], ...timestampToDatetime(article[0].timestamp) });
     sendNewsToLocalStorage({
       ...article[0],
@@ -45,7 +42,6 @@ const News = () => {
     if (!news) {
       getNewsFromFirebase();
     }
-
     window.scrollTo(0, 0);
   }, []);
 
