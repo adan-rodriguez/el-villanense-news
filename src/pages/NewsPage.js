@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { collection, getDocs, query } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { Helmet } from "react-helmet-async";
 import facebookIcon from "../assets/images/facebook.png";
 import twitterIcon from "../assets/images/twitter.png";
@@ -9,11 +9,13 @@ import { db } from "../firebase/firebase";
 import timestampToDatetime from "../utils/timestampToDatetime";
 
 function News() {
+  const CHARACTERS_ID_FIRESTORE = -20;
   const { titleFriendlyUrl } = useParams();
-  const id = titleFriendlyUrl.slice(-20);
+  const id = titleFriendlyUrl.slice(CHARACTERS_ID_FIRESTORE);
 
-  const getNewsFromLocalStorage = (key) =>
+  const getNewsFromLocalStorage = (key) => {
     JSON.parse(localStorage.getItem(key));
+  };
 
   const sendNewsToLocalStorage = (article) => {
     localStorage.setItem(article.id, JSON.stringify(article));
@@ -21,7 +23,9 @@ function News() {
 
   const getNewsFromSessionStorage = (key) => {
     const article = JSON.parse(sessionStorage.getItem(key));
-    sendNewsToLocalStorage(article);
+    if (article) {
+      sendNewsToLocalStorage(article);
+    }
     return article;
   };
 
@@ -30,27 +34,15 @@ function News() {
   );
 
   const getNewsFromFirebase = async () => {
-    const articlesCollection = collection(db, "articles");
-    const q = query(articlesCollection);
-    const data = await getDocs(q);
-    const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    // const article = articles.filter((article) => article.id === idParam);
-    // setNews({ ...article[0], ...timestampToDatetime(article[0].timestamp) });
-    // sendNewsToLocalStorage({
-    //   ...article[0],
-    //   ...timestampToDatetime(article[0].timestamp),
-    // });
-    const article = articles.find((art) => art.id === id);
-    setNews({ article, ...timestampToDatetime(article.timestamp) });
+    const articleRef = doc(db, "articles", id);
+    const data = await getDoc(articleRef);
+    const article = { id: data.id, ...data.data() };
+    setNews({ ...article, ...timestampToDatetime(article.timestamp) });
     sendNewsToLocalStorage({
-      article,
+      ...article,
       ...timestampToDatetime(article.timestamp),
     });
   };
-
-  function createMarkup() {
-    return { __html: news.content };
-  }
 
   useEffect(() => {
     if (!news) {
@@ -116,7 +108,7 @@ function News() {
           loading="lazy"
         />
         <div
-          dangerouslySetInnerHTML={createMarkup()}
+          dangerouslySetInnerHTML={{ __html: news.content }}
           className="content-article"
         />
       </article>

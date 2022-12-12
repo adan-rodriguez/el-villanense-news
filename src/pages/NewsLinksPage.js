@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { Helmet } from "react-helmet-async";
-import NewsItem from "../components/NewsItem";
+import NewsLink from "../components/NewsLink";
 import { db } from "../firebase/firebase";
 import timestampToDatetime from "../utils/timestampToDatetime";
 
@@ -12,12 +12,15 @@ function NewsList() {
   const getNewsFromSessionStorage = () => {
     const articles = [];
     const keys = Object.keys(sessionStorage);
-    if (keys.length !== 0) {
-      keys.forEach((key) => {
-        const article = JSON.parse(sessionStorage.getItem(key));
-        articles.push(article);
-      });
+    if (!keys.length) {
+      return null;
     }
+
+    keys.forEach((key) => {
+      const article = JSON.parse(sessionStorage.getItem(key));
+      articles.push(article);
+    });
+
     articles.sort((a, b) => {
       if (a.timestamp < b.timestamp) {
         return 1;
@@ -28,7 +31,11 @@ function NewsList() {
       return 0;
     });
 
-    return articles;
+    const arts = section
+      ? articles.filter((article) => article.section === section)
+      : articles;
+
+    return arts;
   };
 
   const [news, setNews] = useState(getNewsFromSessionStorage());
@@ -50,18 +57,19 @@ function NewsList() {
     const q = query(articlesCollection, orderBy("timestamp", "desc"));
     const data = await getDocs(q);
     const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    // const articles = data.map((doc) => ({ ...doc.data(), id: doc.id }));
     section
       ? setNews(articles.filter((article) => article.section === section))
       : setNews(articles);
     sendNewsToSessionStorage(articles);
   };
 
-  const getSectionNewsFromSessionStorage = () => {
-    const articles = getNewsFromSessionStorage();
-    section
-      ? setNews(articles.filter((article) => article.section === section))
-      : setNews(articles);
-  };
+  // const getSectionNewsFromSessionStorage = () => {
+  //   const articles = getNewsFromSessionStorage();
+  //   section
+  //     ? setNews(articles.filter((article) => article.section === section))
+  //     : setNews(articles);
+  // };
 
   useEffect(() => {
     if (!sessionStorage.length) {
@@ -69,13 +77,14 @@ function NewsList() {
     }
 
     if (sessionStorage.length !== 0) {
-      getSectionNewsFromSessionStorage();
+      // getSectionNewsFromSessionStorage();
+      setNews(getNewsFromSessionStorage());
     }
 
     window.scrollTo(0, 0);
   }, [section]);
 
-  if (!news.length) {
+  if (!news) {
     return <div>Cargando...</div>;
   }
 
@@ -90,7 +99,7 @@ function NewsList() {
       </Helmet>
       <div className="news-container">
         {news.map((article) => (
-          <NewsItem
+          <NewsLink
             key={article.id}
             id={article.id}
             image={article.image}

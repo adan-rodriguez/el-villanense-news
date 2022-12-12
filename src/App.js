@@ -1,10 +1,10 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { onAuthStateChanged /* signOut */ } from "firebase/auth";
 import { /* useEffect, */ useState } from "react";
-import NewsList from "./pages/NewsList";
-import News from "./pages/News";
+import NewsLinksPage from "./pages/NewsLinksPage";
+import NewsPage from "./pages/NewsPage";
 import Layout from "./Layout";
-import Admin from "./pages/Admin";
+import AdminPage from "./pages/AdminPage";
 import LoginPage from "./pages/LoginPage";
 import { auth } from "./firebase/firebase";
 
@@ -31,7 +31,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout user={isUserLogged} />}>
-        <Route index element={<NewsList />} />
+        <Route index element={<NewsLinksPage />} />
         <Route
           path="login"
           element={
@@ -40,10 +40,12 @@ function App() {
         />
         <Route
           path="admin"
-          element={isUserLogged ? <Admin /> : <Navigate to="/login" replace />}
+          element={
+            isUserLogged ? <AdminPage /> : <Navigate to="/login" replace />
+          }
         />
-        <Route path=":section" element={<NewsList />} />
-        <Route path=":section/:titleFriendlyUrl" element={<News />} />
+        <Route path=":section" element={<NewsLinksPage />} />
+        <Route path=":section/:titleFriendlyUrl" element={<NewsPage />} />
         {/* <Route path=":section/:id" element={<News />} /> */}
         <Route path="*" element={<div>Not Found</div>} />
       </Route>
