@@ -1,6 +1,6 @@
 import {
-  /* browserSessionPersistence, */
-  /* setPersistence, */
+  browserSessionPersistence,
+  setPersistence,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -14,39 +14,48 @@ function LoginPage() {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    signInWithEmailAndPassword(auth, email, password)
-      // .then(
-      //   (userCredential) => {
-      //     // Signed in
-      //     const user = userCredential.user;
-      //     // ...
-      //   }
-      // );
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log(error);
-        // console.dir(error);
-        // console.log("Nombre del error: ", error.name);
-        // console.log("Código del error: ", error.code);
-        // console.log("Mensaje de error: ", error.message);
-        setLoginErrorMessage(true);
-      });
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     const { user } = userCredential;
+    //     console.log(user);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     // console.dir(error);
+    //     // console.log("Nombre del error: ", error.name);
+    //     // console.log("Código del error: ", error.code);
+    //     // console.log("Mensaje de error: ", error.message);
+    //     setLoginErrorMessage(true);
+    //   });
 
     // no me está funcionando con este código. Pero la idea es hacerlo funcionar
-    // setPersistence(auth, browserSessionPersistence)
-    //   .then(() => {
-    //     // Existing and future Auth states are now persisted in the current
-    //     // session only. Closing the window would clear any existing state even
-    //     // if a user forgets to sign out.
-    //     // ...
-    //     // New sign-in will be persisted with session persistence.
-    //     return signInWithEmailAndPassword(auth, email, password);
-    //   })
-    //   // .catch((error) => {
-    //   //   // Handle Errors here.
-    //   //   const errorCode = error.code;
-    //   //   const errorMessage = error.message;
-    //   // });
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with session persistence.
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            const { user } = userCredential;
+            console.log(user);
+          })
+          .catch((error) => {
+            console.log(error);
+            // console.dir(error);
+            // console.log("Nombre del error: ", error.name);
+            // console.log("Código del error: ", error.code);
+            // console.log("Mensaje de error: ", error.message);
+            setLoginErrorMessage(true);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        // // Handle Errors here.
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+      });
   };
 
   useEffect(() => {

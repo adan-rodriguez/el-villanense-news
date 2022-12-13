@@ -19,11 +19,14 @@ function App() {
       //   const uid = user.uid;
       // ...
     } else {
+      // User is signed out
+      // ...
       setIsUserLogged(false);
     }
   });
 
-  // no me funciona este código
+  // // no me funciona este código
+  // // eslint-disable-next-line arrow-body-style
   // useEffect(() => {
   //   return () => signOut(auth);
   // }, []);

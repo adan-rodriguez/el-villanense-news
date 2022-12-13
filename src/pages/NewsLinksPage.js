@@ -57,29 +57,16 @@ function NewsList() {
     const q = query(articlesCollection, orderBy("timestamp", "desc"));
     const data = await getDocs(q);
     const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    // const articles = data.map((doc) => ({ ...doc.data(), id: doc.id }));
     section
       ? setNews(articles.filter((article) => article.section === section))
       : setNews(articles);
     sendNewsToSessionStorage(articles);
   };
 
-  // const getSectionNewsFromSessionStorage = () => {
-  //   const articles = getNewsFromSessionStorage();
-  //   section
-  //     ? setNews(articles.filter((article) => article.section === section))
-  //     : setNews(articles);
-  // };
-
   useEffect(() => {
-    if (!sessionStorage.length) {
-      getNewsFromFirebase();
-    }
-
-    if (sessionStorage.length !== 0) {
-      // getSectionNewsFromSessionStorage();
-      setNews(getNewsFromSessionStorage());
-    }
+    sessionStorage.length === 0
+      ? getNewsFromFirebase()
+      : setNews(getNewsFromSessionStorage());
 
     window.scrollTo(0, 0);
   }, [section]);
