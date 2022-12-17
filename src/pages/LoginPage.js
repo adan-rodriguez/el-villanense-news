@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useState } from "react";
+import LoginForm from "../components/LoginForm";
 import { auth } from "../firebase/firebase";
 
 function LoginPage() {
@@ -69,44 +70,52 @@ function LoginPage() {
   };
 
   return (
-    <>
-      <form className="form-login" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">
-            Email
-            <input
-              type="text"
-              name="email"
-              id="email"
-              value={email}
-              onChange={handleChangeEmail}
-              required
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            Contraseña
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={password}
-              onChange={handleChangePassword}
-              required
-            />
-          </label>
-        </div>
-        <button className="btn-login" type="submit">
-          Ingresar
-        </button>
-      </form>
-      {loginErrorMessage && (
-        <p className="login-error-message" role="alert">
-          Los datos ingresados son incorrectos
-        </p>
-      )}
-    </>
+    // <>
+    //   <form className="form-login" onSubmit={handleSubmit}>
+    //     <div>
+    //       <label htmlFor="email">
+    //         Email
+    //         <input
+    //           type="text"
+    //           name="email"
+    //           id="email"
+    //           value={email}
+    //           onChange={handleChangeEmail}
+    //           required
+    //         />
+    //       </label>
+    //     </div>
+    //     <div>
+    //       <label htmlFor="password">
+    //         Contraseña
+    //         <input
+    //           type="password"
+    //           name="password"
+    //           id="password"
+    //           value={password}
+    //           onChange={handleChangePassword}
+    //           required
+    //         />
+    //       </label>
+    //     </div>
+    //     <button className="btn-login" type="submit">
+    //       Ingresar
+    //     </button>
+    //   </form>
+    //   {loginErrorMessage && (
+    //     <p className="login-error-message" role="alert">
+    //       Los datos ingresados son incorrectos
+    //     </p>
+    //   )}
+    // </>
+    <LoginForm
+      email={email}
+      password={password}
+      handleChangeEmail={handleChangeEmail}
+      handleChangePassword={handleChangePassword}
+      handleSubmit={handleSubmit}
+      loginErrorMessage={loginErrorMessage}
+    />
   );
 }
 
