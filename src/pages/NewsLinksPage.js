@@ -1,12 +1,11 @@
+// import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { Helmet } from "react-helmet-async";
-import NewsLink from "../components/NewsLink";
-import { db } from "../firebase/firebase";
 import timestampToDatetime from "../utils/timestampToDatetime";
+import NewsLinksContainer from "../containers/NewsLinksContainer";
+import getAllDocs from "../firebase/firebaseService";
 
-function NewsList() {
+function NewsLinksPage() {
   const { section } = useParams();
 
   const getNewsFromSessionStorage = () => {
@@ -39,7 +38,6 @@ function NewsList() {
   };
 
   const [news, setNews] = useState(getNewsFromSessionStorage());
-
   const sendNewsToSessionStorage = (articles) => {
     articles.forEach((article) =>
       sessionStorage.setItem(
@@ -52,11 +50,8 @@ function NewsList() {
     );
   };
 
-  const getNewsFromFirebase = async () => {
-    const articlesCollection = collection(db, "articles");
-    const q = query(articlesCollection, orderBy("timestamp", "desc"));
-    const data = await getDocs(q);
-    const articles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  const getAllNewsFromFirebase = async () => {
+    const articles = await getAllDocs();
     section
       ? setNews(articles.filter((article) => article.section === section))
       : setNews(articles);
@@ -65,39 +60,27 @@ function NewsList() {
 
   useEffect(() => {
     sessionStorage.length === 0
-      ? getNewsFromFirebase()
+      ? getAllNewsFromFirebase()
       : setNews(getNewsFromSessionStorage());
 
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }, [section]);
-
-  if (!news) {
-    return <div>Cargando...</div>;
-  }
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <title>El Villanense - Noticias de Villa Ana</title>
         <meta
           name="description"
           content="Todas las noticias de Villa Ana y las noticias más importantes de la región, de la provincia de Santa Fe, de la Argentina y del mundo."
         />
-      </Helmet>
-      <div className="news-container">
-        {news.map((article) => (
-          <NewsLink
-            key={article.id}
-            id={article.id}
-            image={article.image}
-            timestamp={article.timestamp}
-            title={article.title}
-            section={article.section}
-          />
-        ))}
+      </Helmet> */}
+      <div>
+        Noticias {section && section[0].toUpperCase() + section.slice(1)}
       </div>
+      <NewsLinksContainer news={news} />
     </>
   );
 }
 
-export default NewsList;
+export default NewsLinksPage;

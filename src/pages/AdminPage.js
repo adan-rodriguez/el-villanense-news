@@ -4,7 +4,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import TinyMCE from "../components/TinyMCE";
 
-function Admin() {
+function AdminPage() {
   const [article, setArticle] = useState({
     title: "",
     image: "",
@@ -159,4 +159,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default AdminPage;

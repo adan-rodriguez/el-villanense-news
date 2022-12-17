@@ -33,7 +33,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout user={isUserLogged} />}>
+      <Route path="/" element={<Layout /* user={isUserLogged} */ />}>
         <Route index element={<NewsLinksPage />} />
         <Route
           path="login"

@@ -3,16 +3,18 @@ import {
   setPersistence,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { auth } from "../firebase/firebase";
 
 function LoginPage() {
   const [loginErrorMessage, setLoginErrorMessage] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+    const correo = email;
+    const contraseña = password;
 
     // signInWithEmailAndPassword(auth, email, password)
     //   .then((userCredential) => {
@@ -36,7 +38,7 @@ function LoginPage() {
         // if a user forgets to sign out.
         // ...
         // New sign-in will be persisted with session persistence.
-        signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, correo, contraseña)
           .then((userCredential) => {
             const { user } = userCredential;
             console.log(user);
@@ -58,10 +60,13 @@ function LoginPage() {
       });
   };
 
-  useEffect(() => {
-    loginErrorMessage &&
-      document.querySelector(".login-error-message").removeAttribute("hidden");
-  }, [loginErrorMessage]);
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
 
   return (
     <>
@@ -69,22 +74,38 @@ function LoginPage() {
         <div>
           <label htmlFor="email">
             Email
-            <input type="text" name="email" id="email" required />
+            <input
+              type="text"
+              name="email"
+              id="email"
+              value={email}
+              onChange={handleChangeEmail}
+              required
+            />
           </label>
         </div>
         <div>
           <label htmlFor="password">
             Contraseña
-            <input type="password" name="password" id="password" required />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={password}
+              onChange={handleChangePassword}
+              required
+            />
           </label>
         </div>
         <button className="btn-login" type="submit">
           Ingresar
         </button>
       </form>
-      <p className="login-error-message" hidden>
-        Los datos ingresados son incorrectos
-      </p>
+      {loginErrorMessage && (
+        <p className="login-error-message" role="alert">
+          Los datos ingresados son incorrectos
+        </p>
+      )}
     </>
   );
 }

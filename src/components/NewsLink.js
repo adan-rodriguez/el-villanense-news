@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import timestampToDatetime from "../utils/timestampToDatetime";
 import getFriendlyUrl from "../utils/getFriendlyUrl";
 
-function NewsItem({ image, timestamp, title, section, id }) {
+function NewsLink({ image, timestamp, title, section, id }) {
   const { datetimeAttribute, dateContent } = timestampToDatetime(timestamp);
 
   const titleFriendlyUrl = getFriendlyUrl(title);
@@ -23,7 +23,7 @@ function NewsItem({ image, timestamp, title, section, id }) {
   );
 }
 
-NewsItem.propTypes = {
+NewsLink.propTypes = {
   image: PropTypes.string.isRequired,
   timestamp: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
@@ -31,4 +31,4 @@ NewsItem.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export default NewsItem;
+export default NewsLink;
