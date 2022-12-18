@@ -2,160 +2,80 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-import TinyMCE from "../components/TinyMCE";
+import AdminForm from "../components/AdminForm";
+import timestampToDatetime from "../utils/timestampToDatetime";
+import getFriendlyUrl from "../utils/getFriendlyUrl";
 
 function AdminPage() {
-  const [article, setArticle] = useState({
-    title: "",
-    image: "",
-    timestamp: "",
-    lead: "",
-    section: "locales",
-    content: "",
-  });
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+  const [lead, setLead] = useState("");
+  const [section, setSection] = useState("locales");
+  const [content, setContent] = useState("");
 
-  // // TODO: Segun midudev se debería hacer así para hacer nuestro código más legible y siempre actualizar sólo la parte que toca
-  // const [title, setTitle] = useState()
-  // const [image, setImage] = useState()
-  // const [timestamp, setTimestamp] = useState()
-  // const [lead, setLead] = useState()
-  // const [section, setSection] = useState("locales")
-  // const [content, setContent] = useState()
+  const article = {
+    title,
+    image,
+    lead,
+    section,
+    content,
+  };
 
   const navigate = useNavigate();
 
-  const articlesCollection = collection(db, "articles");
-
-  const handleChange = (e) => {
-    setArticle({
-      ...article,
-      [e.target.name]: e.target.value,
-    });
+  const handleChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleChangeImage = (e) => {
+    setImage(e.target.value);
+  };
+  const handleChangeLead = (e) => {
+    setLead(e.target.value);
+  };
+  const handleChangeSection = (e) => {
+    setSection(e.target.value);
   };
 
-  const getContentTiny = async (content) => {
-    setArticle({
-      ...article,
-      content,
-    });
+  const getContentTiny = async (contentTiny) => {
+    setContent(contentTiny);
   };
 
-  const setTimestamp = () => {
-    // TODO: que es e.timeStamp? no da el mismo número que Date.now()
-    setArticle({
-      ...article,
-      timestamp: Date.now(),
-    });
+  const handlersChangesAdminForm = {
+    handleChangeTitle,
+    handleChangeImage,
+    handleChangeLead,
+    handleChangeSection,
+    getContentTiny,
   };
 
   const addArticle = async (e) => {
     e.preventDefault();
 
-    await addDoc(articlesCollection, article);
+    const timestamp = Date.now();
+
+    const dataForFirebase = {
+      ...article,
+      timestamp,
+      ...timestampToDatetime(timestamp),
+      friendlyUrl: getFriendlyUrl(article.title),
+    };
+
+    const articlesCollection = collection(db, "articles");
+
+    await addDoc(articlesCollection, dataForFirebase);
+
     navigate("/");
   };
 
   return (
-    <div>
+    <>
       <h1 className="title-new-article">Nuevo artículo</h1>
-      <form className="form-add-article" onSubmit={addArticle}>
-        <div>
-          <label htmlFor="title">
-            Título
-            <input
-              type="text"
-              name="title"
-              id="title"
-              placeholder="Título"
-              required
-              value={article.title}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="image">
-            Imagen
-            <input
-              type="text"
-              name="image"
-              id="image"
-              placeholder="URL Imagen"
-              required
-              value={article.image}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        {/* <div>
-          <label htmlFor="datetime">Fecha y hora</label>
-          <input
-            type="datetime-local"
-            name="datetime"
-            id="datetime"
-            placeholder="Fecha y hora"
-            required
-            value={article.datetime}
-            onChange={handleChange}
-          />
-        </div> */}
-        <div>
-          <label htmlFor="lead">
-            Entrada
-            <textarea
-              type="text"
-              name="lead"
-              id="lead"
-              placeholder="Entrada"
-              required
-              value={article.lead}
-              onChange={handleChange}
-              rows="4"
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="section">
-            Sección
-            <select
-              name="section"
-              id="section"
-              required
-              value={article.section}
-              onChange={handleChange}
-            >
-              <option value="locales">Locales</option>
-              <option value="regionales">Regionales</option>
-              <option value="provinciales">Provinciales</option>
-              <option value="nacionales">Nacionales</option>
-              <option value="internacionales">Internacionales</option>
-            </select>
-          </label>
-        </div>
-        {/* <div>
-          <label htmlFor="content">Cuerpo</label>
-          <textarea
-            type="text"
-            name="content"
-            id="content"
-            placeholder="Cuerpo"
-            required
-            value={article.content}
-            onChange={handleChange}
-            rows="10"
-          ></textarea>
-        </div> */}
-        {/* <textarea name="content" id="mytextarea">Hello, World!</textarea> */}
-        <TinyMCE getContent={getContentTiny} />
-        <button
-          onClick={setTimestamp}
-          className="btn-upload-article"
-          type="submit"
-        >
-          Subir artículo
-        </button>
-      </form>
-    </div>
+      <AdminForm
+        article={article}
+        handlers={handlersChangesAdminForm}
+        addArticle={addArticle}
+      />
+    </>
   );
 }
 

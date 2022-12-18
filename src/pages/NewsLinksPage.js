@@ -1,24 +1,19 @@
 // import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import timestampToDatetime from "../utils/timestampToDatetime";
 import NewsLinksContainer from "../containers/NewsLinksContainer";
 import getAllDocs from "../firebase/firebaseService";
 
 function NewsLinksPage() {
   const { section } = useParams();
+  console.log(section);
 
   const getNewsFromSessionStorage = () => {
-    const articles = [];
-    const keys = Object.keys(sessionStorage);
-    if (!keys.length) {
+    if (sessionStorage.length === 0) {
       return null;
     }
 
-    keys.forEach((key) => {
-      const article = JSON.parse(sessionStorage.getItem(key));
-      articles.push(article);
-    });
+    const articles = JSON.parse(sessionStorage.getItem("articles"));
 
     articles.sort((a, b) => {
       if (a.timestamp < b.timestamp) {
@@ -30,28 +25,24 @@ function NewsLinksPage() {
       return 0;
     });
 
-    const arts = section
+    const noticias = section
       ? articles.filter((article) => article.section === section)
       : articles;
 
-    return arts;
+    return noticias;
   };
 
   const [news, setNews] = useState(getNewsFromSessionStorage());
+  console.log("News", news);
+  // const [news, setNews] = useState(null);
+
   const sendNewsToSessionStorage = (articles) => {
-    articles.forEach((article) =>
-      sessionStorage.setItem(
-        article.id,
-        JSON.stringify({
-          ...article,
-          ...timestampToDatetime(article.timestamp),
-        })
-      )
-    );
+    sessionStorage.setItem("articles", JSON.stringify(articles));
   };
 
   const getAllNewsFromFirebase = async () => {
     const articles = await getAllDocs();
+    console.log(articles);
     section
       ? setNews(articles.filter((article) => article.section === section))
       : setNews(articles);

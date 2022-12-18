@@ -48,7 +48,7 @@ function App() {
           }
         />
         <Route path=":section" element={<NewsLinksPage />} />
-        <Route path=":section/:titleFriendlyUrl" element={<NewsPage />} />
+        <Route path=":section/:friendlyUrl" element={<NewsPage />} />
         {/* <Route path=":section/:id" element={<News />} /> */}
         <Route path="*" element={<div>Not Found</div>} />
       </Route>

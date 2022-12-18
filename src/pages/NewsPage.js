@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import timestampToDatetime from "../utils/timestampToDatetime";
 import { getADoc } from "../firebase/firebaseService";
 import News from "../components/News";
 
 function NewsPage() {
   const CHARACTERS_ID_FIRESTORE = -20;
-  const { titleFriendlyUrl } = useParams();
-  const id = titleFriendlyUrl.slice(CHARACTERS_ID_FIRESTORE);
+  const { friendlyUrl } = useParams();
+  const id = friendlyUrl.slice(CHARACTERS_ID_FIRESTORE);
 
   const getNewsFromLocalStorage = (key) => {
     JSON.parse(localStorage.getItem(key));
@@ -31,11 +30,8 @@ function NewsPage() {
 
   const getNewsFromFirebase = async () => {
     const article = await getADoc(id);
-    setNews({ ...article, ...timestampToDatetime(article.timestamp) });
-    sendNewsToLocalStorage({
-      ...article,
-      ...timestampToDatetime(article.timestamp),
-    });
+    setNews(article);
+    sendNewsToLocalStorage(article);
   };
 
   useEffect(() => {

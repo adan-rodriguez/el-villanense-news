@@ -13,8 +13,10 @@ function NewsLinksContainer({ news }) {
           key={article.id}
           id={article.id}
           image={article.image}
-          timestamp={article.timestamp}
           title={article.title}
+          friendlyUrl={article.friendlyUrl}
+          datetimeAttribute={article.datetimeAttribute}
+          dateContent={article.dateContent}
           section={article.section}
         />
       ))}
