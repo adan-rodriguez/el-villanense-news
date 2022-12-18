@@ -9,7 +9,7 @@ function NewsLinksPage() {
   console.log(section);
 
   const getNewsFromSessionStorage = () => {
-    if (sessionStorage.length === 0) {
+    if (!sessionStorage.articles) {
       return null;
     }
 
@@ -50,7 +50,7 @@ function NewsLinksPage() {
   };
 
   useEffect(() => {
-    sessionStorage.length === 0
+    !sessionStorage.articles
       ? getAllNewsFromFirebase()
       : setNews(getNewsFromSessionStorage());
 
