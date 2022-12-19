@@ -26,7 +26,3 @@ test("Testing header", async () => {
   await user.click(openButton);
   expect(openButton).not.toBeVisible();
 });
-
-// queryBy...: This is useful for asserting an element that is not present.
-// findBy...: Returns a Promise which resolves when an element is found which matches the given query. The promise is rejected if no element is found or if more than one element is found after a default timeout of 1000ms
-// findBy methods are a combination of getBy* queries and waitFor. They accept the waitFor options as the last argument (i.e. await screen.findByText('text', queryOptions, waitForOptions))

@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { onAuthStateChanged /* signOut */ } from "firebase/auth";
-import { /* useEffect, */ useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { useState } from "react";
 import NewsLinksPage from "./pages/NewsLinksPage";
 import NewsPage from "./pages/NewsPage";
 import Layout from "./Layout";
@@ -25,15 +25,9 @@ function App() {
     }
   });
 
-  // // no me funciona este código
-  // // eslint-disable-next-line arrow-body-style
-  // useEffect(() => {
-  //   return () => signOut(auth);
-  // }, []);
-
   return (
     <Routes>
-      <Route path="/" element={<Layout /* user={isUserLogged} */ />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<NewsLinksPage />} />
         <Route
           path="login"
@@ -49,7 +43,6 @@ function App() {
         />
         <Route path=":section" element={<NewsLinksPage />} />
         <Route path=":section/:friendlyUrl" element={<NewsPage />} />
-        {/* <Route path=":section/:id" element={<News />} /> */}
         <Route path="*" element={<div>Not Found</div>} />
       </Route>
     </Routes>

@@ -38,6 +38,7 @@ function NewsPage() {
     if (!news) {
       getNewsFromFirebase();
     }
+
     // window.scrollTo(0, 0);
   }, []);
 

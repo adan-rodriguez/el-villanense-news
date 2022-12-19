@@ -25,7 +25,8 @@ function News({ news }) {
       <article className="article-container">
         <h1>{news.title}</h1>
         <div className="share-social-container">
-          {/* no sé el motivo por el que no funcionan correctamente éstos enlaces para compartir */}
+          {/* Estos enlaces no funcionan porque la página se debe renderizar del lado del servidor
+          TODO: RENDERIZAR DEL LADO DEL SERVIDOR EN EL FUTURO */}
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
             target="_blank"
