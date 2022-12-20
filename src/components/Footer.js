@@ -2,6 +2,12 @@ import Logo from "./Logo";
 import SocialMedia from "./SocialMedia";
 
 function Footer() {
+  const getCurrentYear = () => {
+    const currentTime = new Date();
+    const year = currentTime.getFullYear();
+    return year;
+  };
+
   return (
     <footer className="footer">
       <SocialMedia className="social-footer" />
@@ -24,7 +30,8 @@ function Footer() {
         </ul>
       </address>
       <p className="copyright-footer">
-        Copyright 2022 www.elvillanense.com.ar - Todos los derechos reservados
+        Copyright {getCurrentYear()} www.elvillanense.com.ar - Todos los
+        derechos reservados
       </p>
     </footer>
   );
