@@ -3,9 +3,10 @@ import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import LoginPage from "../LoginPage";
 
+beforeAll(() => render(<LoginPage />, { wrapper: BrowserRouter }));
+
 test("should show login form", async () => {
   const user = userEvent.setup();
-  render(<LoginPage />, { wrapper: BrowserRouter });
 
   expect(
     screen.queryByText("Los datos ingresados son incorrectos")

@@ -38,7 +38,7 @@ function Header() {
         >
           <img src={menuIcon} alt="Abrir menú" />
         </button>
-        <div className="top-navbar">
+        <div data-testid="top-navbar" className="top-navbar">
           <button
             type="button"
             onClick={() => setMenuopen(!menuopen)}
