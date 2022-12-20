@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Helmet } from "react-helmet-async";
+// import { Helmet } from "react-helmet-async";
 import facebookIcon from "../assets/images/facebook.png";
 import twitterIcon from "../assets/images/twitter.png";
 import whatsappIcon from "../assets/images/whatsapp.png";
@@ -11,7 +11,7 @@ function News({ news }) {
 
   return (
     <div className="news-container news-container-article">
-      <Helmet>
+      {/* <Helmet>
         <title>{news.title}</title>
         <meta name="description" content={news.lead} />
         <meta property="og:title" content={news.title} />
@@ -21,7 +21,7 @@ function News({ news }) {
         <meta property="og:image" content={news.image} />
         <meta property="og:site_name" content="El Villanense" />
         <meta name="twitter:card" content="summary_large_image" />
-      </Helmet>
+      </Helmet> */}
       <article className="article-container">
         <h1>{news.title}</h1>
         <div className="share-social-container">
@@ -59,7 +59,7 @@ function News({ news }) {
         <img
           className="news-img news-img-bigger"
           src={news.image}
-          alt={news.title}
+          alt={news.altImage}
           loading="lazy"
         />
         <div

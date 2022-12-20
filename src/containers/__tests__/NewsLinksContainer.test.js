@@ -8,6 +8,7 @@ test("renderizando un link de noticia", () => {
       id: "3P97vs9KIRmjqopudTyL",
       title: "Autorizaron el uso de cuatro test de autoevaluación",
       image: "https://www.elvillanense.com.ar/img/autotest-covid.jpg",
+      altImage: "Test de autoevaluación",
       section: "nacionales",
       friendlyUrl:
         "paso-2021-en-santa-fe-las-boletas-para-las-elecciones-una-por-una",
@@ -19,7 +20,7 @@ test("renderizando un link de noticia", () => {
   render(<NewsLinksContainer news={mockNews} />, {
     wrapper: BrowserRouter,
   });
-  expect(screen.getByAltText(mockNews[0].title)).toBeInTheDocument();
+  expect(screen.getByAltText(mockNews[0].altImage)).toBeInTheDocument();
   expect(screen.getByText(mockNews[0].dateContent)).toBeInTheDocument();
   expect(screen.getByText(mockNews[0].title)).toBeInTheDocument();
 });

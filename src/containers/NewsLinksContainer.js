@@ -13,6 +13,7 @@ function NewsLinksContainer({ news }) {
           key={article.id}
           id={article.id}
           image={article.image}
+          altImage={article.altImage}
           title={article.title}
           friendlyUrl={article.friendlyUrl}
           datetimeAttribute={article.datetimeAttribute}

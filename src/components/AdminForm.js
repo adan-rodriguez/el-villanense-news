@@ -2,10 +2,11 @@ import PropTypes from "prop-types";
 import TinyMCE from "./TinyMCE";
 
 function AdminForm({ article, handlers, addArticle }) {
-  const { title, image, lead, section } = article;
+  const { title, image, altImage, lead, section } = article;
   const {
     handleChangeTitle,
     handleChangeImage,
+    handleChangeAltImage,
     handleChangeLead,
     handleChangeSection,
     getContentTiny,
@@ -37,6 +38,20 @@ function AdminForm({ article, handlers, addArticle }) {
             required
             value={image}
             onChange={handleChangeImage}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="alt-image">
+          Texto alternativo de la imagen
+          <input
+            type="text"
+            name="alt-image"
+            id="alt-image"
+            placeholder="Introduce el texto alternativo..."
+            required
+            value={altImage}
+            onChange={handleChangeAltImage}
           />
         </label>
       </div>
