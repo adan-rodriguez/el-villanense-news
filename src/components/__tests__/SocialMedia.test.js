@@ -10,13 +10,13 @@ test("links a las redes sociales de la página", () => {
     "Seguinos en Twitter",
   ];
   tooltipsLinks.forEach((tooltipLink) => {
-    expect(screen.getByTitle(tooltipLink));
+    expect(screen.getByTitle(tooltipLink)).toBeInTheDocument();
   });
 });
 
 test("imágenes de los links a las redes sociales de la página", () => {
   const altsImgs = ["Facebook", "Instagram", "Twitter"];
   altsImgs.forEach((altImg) => {
-    expect(screen.getByAltText(altImg));
+    expect(screen.getByAltText(altImg)).toBeInTheDocument();
   });
 });
