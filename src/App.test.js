@@ -25,6 +25,18 @@ test("full app rendering/navigating", () => {
 });
 
 test("landing on a bad page", () => {
+  const sectionRoute = "/locales";
+
+  render(
+    <MemoryRouter initialEntries={[sectionRoute]}>
+      <App />
+    </MemoryRouter>
+  );
+
+  expect(screen.getByText("Noticias Locales")).toBeInTheDocument();
+});
+
+test("landing on a bad page", () => {
   const badRoute = "/some/bad/route";
 
   // use <MemoryRouter> when you want to manually control the history
