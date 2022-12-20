@@ -5,10 +5,6 @@ import Header from "../Header";
 
 beforeEach(() => render(<Header />, { wrapper: BrowserRouter }));
 
-test("debe mostrar 'El Villanense'", () => {
-  expect(screen.getByText("El Villanense")).toBeInTheDocument();
-});
-
 test("debe mostrar los links de navegación", () => {
   const navLinksText = [
     "Inicio",
