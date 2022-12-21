@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import News from "../News";
 
-test("renderizando una de noticia", () => {
+test("renderizando una noticia", () => {
   const mockNews = {
     title:
       "La inflación se aceleró a 3,8% en diciembre y acumuló 50,9% en 2021",

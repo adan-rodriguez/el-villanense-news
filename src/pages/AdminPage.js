@@ -5,6 +5,7 @@ import { db } from "../firebase/firebase";
 import AdminForm from "../components/AdminForm";
 import timestampToDatetime from "../utils/timestampToDatetime";
 import getFriendlyUrl from "../utils/getFriendlyUrl";
+import { getLastNews } from "../firebase/firebaseService";
 
 function AdminPage() {
   const [title, setTitle] = useState("");
@@ -73,6 +74,13 @@ function AdminPage() {
     const articlesCollection = collection(db, "articles");
 
     await addDoc(articlesCollection, dataForFirebase);
+
+    if (sessionStorage.articles) {
+      const articleUpload = await getLastNews();
+      const articles = JSON.parse(sessionStorage.getItem("articles"));
+      articles.unshift(articleUpload);
+      sessionStorage.setItem("articles", JSON.stringify(articles));
+    }
 
     navigate("/");
   };
