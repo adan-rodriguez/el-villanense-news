@@ -19,7 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-precommit": "react-scripts test --watchAll=false",
+    "test-q": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "format": "prettier --write .",
