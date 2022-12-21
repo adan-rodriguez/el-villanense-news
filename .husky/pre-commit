@@ -2,5 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npx lint-staged
-npm run test-precommit
-npm run cy-run
+npm run test-q -- --coverage
+npm start & wait-on http://localhost:3000 & npm run cy-run

@@ -1,7 +1,11 @@
 /// <reference types="Cypress" />
 
-describe("empty spec", () => {
-  it("passes", () => {
-    cy.visit("https://example.cypress.io");
+describe("My App", () => {
+  it("Visit Homepage", () => {
+    cy.visit("/");
+
+    cy.contains("Locales").click();
+
+    cy.url().should("include", "/locales");
   });
 });

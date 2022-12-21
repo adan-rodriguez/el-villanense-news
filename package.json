@@ -13,13 +13,14 @@
     "react-helmet-async": "^1.3.0",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
+    "wait-on": "^7.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-precommit": "react-scripts test --watchAll=false",
+    "test-q": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "format": "prettier --write .",
