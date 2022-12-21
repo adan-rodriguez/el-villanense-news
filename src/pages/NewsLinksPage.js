@@ -6,7 +6,6 @@ import getAllDocs from "../firebase/firebaseService";
 
 function NewsLinksPage() {
   const { section } = useParams();
-  console.log(section);
 
   const getNewsFromSessionStorage = () => {
     if (!sessionStorage.articles) {
@@ -33,8 +32,6 @@ function NewsLinksPage() {
   };
 
   const [news, setNews] = useState(getNewsFromSessionStorage());
-  console.log("News", news);
-  // const [news, setNews] = useState(null);
 
   const sendNewsToSessionStorage = (articles) => {
     sessionStorage.setItem("articles", JSON.stringify(articles));
@@ -42,7 +39,6 @@ function NewsLinksPage() {
 
   const getAllNewsFromFirebase = async () => {
     const articles = await getAllDocs();
-    console.log(articles);
     section
       ? setNews(articles.filter((article) => article.section === section))
       : setNews(articles);

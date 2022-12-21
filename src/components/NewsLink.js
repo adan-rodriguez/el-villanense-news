@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
-// import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-// import timestampToDatetime from "../utils/timestampToDatetime";
-// import getFriendlyUrl from "../utils/getFriendlyUrl";
 
 function NewsLink({
   image,
+  altImage,
   title,
   friendlyUrl,
   datetimeAttribute,
@@ -13,16 +11,11 @@ function NewsLink({
   section,
   id,
 }) {
-  // const { datetimeAttribute, dateContent } = timestampToDatetime(timestamp);
-
-  // const titleFriendlyUrl = getFriendlyUrl(title);
-
   return (
-    // <Link className="news-link" to={`/${section}/${titleFriendlyUrl}`}>
     <Link className="news-link" to={`/${section}/${friendlyUrl}-${id}`}>
       <article>
-        {/* Agregar en Admin un input para introducir el texto alternativo de la imagen */}
-        <img className="news-img" src={image} alt={title} loading="lazy" />
+        {/* TODO: Agregar en Admin un input para introducir el texto alternativo de la imagen */}
+        <img className="news-img" src={image} alt={altImage} loading="lazy" />
         <time className="news-time" dateTime={datetimeAttribute}>
           {dateContent}
         </time>
@@ -31,13 +24,5 @@ function NewsLink({
     </Link>
   );
 }
-
-// NewsLink.propTypes = {
-//   image: PropTypes.string.isRequired,
-//   timestamp: PropTypes.number.isRequired,
-//   title: PropTypes.string.isRequired,
-//   section: PropTypes.string.isRequired,
-//   id: PropTypes.string.isRequired,
-// };
 
 export default NewsLink;

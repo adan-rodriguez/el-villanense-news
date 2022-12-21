@@ -5,10 +5,12 @@ import { db } from "../firebase/firebase";
 import AdminForm from "../components/AdminForm";
 import timestampToDatetime from "../utils/timestampToDatetime";
 import getFriendlyUrl from "../utils/getFriendlyUrl";
+import { getLastNews } from "../firebase/firebaseService";
 
 function AdminPage() {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
+  const [altImage, setAltImage] = useState("");
   const [lead, setLead] = useState("");
   const [section, setSection] = useState("locales");
   const [content, setContent] = useState("");
@@ -16,6 +18,7 @@ function AdminPage() {
   const article = {
     title,
     image,
+    altImage,
     lead,
     section,
     content,
@@ -26,12 +29,19 @@ function AdminPage() {
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
   };
+
   const handleChangeImage = (e) => {
     setImage(e.target.value);
   };
+
+  const handleChangeAltImage = (e) => {
+    setAltImage(e.target.value);
+  };
+
   const handleChangeLead = (e) => {
     setLead(e.target.value);
   };
+
   const handleChangeSection = (e) => {
     setSection(e.target.value);
   };
@@ -43,6 +53,7 @@ function AdminPage() {
   const handlersChangesAdminForm = {
     handleChangeTitle,
     handleChangeImage,
+    handleChangeAltImage,
     handleChangeLead,
     handleChangeSection,
     getContentTiny,
@@ -63,6 +74,13 @@ function AdminPage() {
     const articlesCollection = collection(db, "articles");
 
     await addDoc(articlesCollection, dataForFirebase);
+
+    if (sessionStorage.articles) {
+      const articleUpload = await getLastNews();
+      const articles = JSON.parse(sessionStorage.getItem("articles"));
+      articles.unshift(articleUpload);
+      sessionStorage.setItem("articles", JSON.stringify(articles));
+    }
 
     navigate("/");
   };
