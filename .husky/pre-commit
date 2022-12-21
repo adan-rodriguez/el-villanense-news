@@ -3,4 +3,4 @@
 
 npx lint-staged
 npm run test-q -- --coverage
-npm run cy-run
+npm start & wait-on http://localhost:3000 & npm run cy-run
