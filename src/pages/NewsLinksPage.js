@@ -62,9 +62,11 @@ function NewsLinksPage() {
           content="Todas las noticias de Villa Ana y las noticias más importantes de la región, de la provincia de Santa Fe, de la Argentina y del mundo."
         />
       </Helmet> */}
-      <div>
-        Noticias {section && section[0].toUpperCase() + section.slice(1)}
-      </div>
+      <h1 className="section-title">
+        {section
+          ? `Noticias ${section[0].toUpperCase()}${section.slice(1)}`
+          : "Noticias"}
+      </h1>
       <NewsLinksContainer news={news} />
     </>
   );

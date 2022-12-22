@@ -30,8 +30,8 @@ function Footer() {
         </ul>
       </address>
       <p className="copyright-footer">
-        Copyright {getCurrentYear()} www.elvillanense.com.ar - Todos los
-        derechos reservados
+        {`Copyright ${getCurrentYear()} www.elvillanense.com.ar - Todos los
+        derechos reservados`}
       </p>
     </footer>
   );
