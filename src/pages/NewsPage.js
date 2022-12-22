@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getADoc } from "../firebase/firebaseService";
 import News from "../components/News";
+import scrollToTop from "../utils/scrollToTop";
 
 function NewsPage() {
   const CHARACTERS_ID_FIRESTORE = -20;
@@ -9,7 +10,8 @@ function NewsPage() {
   const id = friendlyUrl.slice(CHARACTERS_ID_FIRESTORE);
 
   const getNewsFromLocalStorage = (key) => {
-    JSON.parse(localStorage.getItem(key));
+    const article = JSON.parse(localStorage.getItem(key));
+    return article;
   };
 
   const sendNewsToLocalStorage = (article) => {
@@ -17,11 +19,13 @@ function NewsPage() {
   };
 
   const getNewsFromSessionStorage = (key) => {
-    const article = JSON.parse(sessionStorage.getItem(key));
-    if (article) {
+    const articles = JSON.parse(sessionStorage.getItem("articles"));
+    if (articles) {
+      const article = articles.find((art) => art.id === key);
       sendNewsToLocalStorage(article);
+      return article;
     }
-    return article;
+    return null;
   };
 
   const [news, setNews] = useState(
@@ -39,7 +43,7 @@ function NewsPage() {
       getNewsFromFirebase();
     }
 
-    // window.scrollTo(0, 0);
+    scrollToTop();
   }, []);
 
   return <News news={news} />;

@@ -59,11 +59,12 @@ function AdminPage() {
     getContentTiny,
   };
 
-  const addArticle = async (e) => {
-    e.preventDefault();
-
+  const getTimestamp = () => {
     const timestamp = Date.now();
+    return timestamp;
+  };
 
+  const prepareDataForFirebase = (timestamp) => {
     const dataForFirebase = {
       ...article,
       timestamp,
@@ -71,16 +72,28 @@ function AdminPage() {
       friendlyUrl: getFriendlyUrl(article.title),
     };
 
+    return dataForFirebase;
+  };
+
+  const sendNewsUploadToSessionStorage = async () => {
+    const articleUpload = await getLastNews();
+    const articles = JSON.parse(sessionStorage.getItem("articles"));
+    articles.unshift(articleUpload);
+    sessionStorage.setItem("articles", JSON.stringify(articles));
+  };
+
+  const addArticle = async (e) => {
+    e.preventDefault();
+
+    const timestamp = getTimestamp();
+
+    const dataForFirebase = prepareDataForFirebase(timestamp);
+
     const articlesCollection = collection(db, "articles");
 
     await addDoc(articlesCollection, dataForFirebase);
 
-    if (sessionStorage.articles) {
-      const articleUpload = await getLastNews();
-      const articles = JSON.parse(sessionStorage.getItem("articles"));
-      articles.unshift(articleUpload);
-      sessionStorage.setItem("articles", JSON.stringify(articles));
-    }
+    sessionStorage.articles && (await sendNewsUploadToSessionStorage());
 
     navigate("/");
   };

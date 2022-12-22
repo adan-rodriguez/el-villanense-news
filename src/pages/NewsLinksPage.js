@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NewsLinksContainer from "../containers/NewsLinksContainer";
 import getAllDocs from "../firebase/firebaseService";
+import scrollToTop from "../utils/scrollToTop";
+import sortArray from "../utils/sortArray";
 
 function NewsLinksPage() {
   const { section } = useParams();
@@ -14,21 +16,13 @@ function NewsLinksPage() {
 
     const articles = JSON.parse(sessionStorage.getItem("articles"));
 
-    articles.sort((a, b) => {
-      if (a.timestamp < b.timestamp) {
-        return 1;
-      }
-      if (a.timestamp > b.timestamp) {
-        return -1;
-      }
-      return 0;
-    });
+    sortArray(articles, "timestamp");
 
-    const noticias = section
-      ? articles.filter((article) => article.section === section)
-      : articles;
+    if (section) {
+      return articles.filter((article) => article.section === section);
+    }
 
-    return noticias;
+    return articles;
   };
 
   const [news, setNews] = useState(getNewsFromSessionStorage());
@@ -50,7 +44,7 @@ function NewsLinksPage() {
       ? getAllNewsFromFirebase()
       : setNews(getNewsFromSessionStorage());
 
-    // window.scrollTo(0, 0);
+    scrollToTop();
   }, [section]);
 
   return (

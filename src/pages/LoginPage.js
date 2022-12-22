@@ -24,11 +24,6 @@ function LoginPage() {
     //   })
     //   .catch((error) => {
     //     console.log(error);
-    //     // console.dir(error);
-    //     // console.log("Nombre del error: ", error.name);
-    //     // console.log("Código del error: ", error.code);
-    //     // console.log("Mensaje de error: ", error.message);
-    //     setLoginErrorMessage(true);
     //   });
 
     setPersistence(auth, browserSessionPersistence)
@@ -39,24 +34,17 @@ function LoginPage() {
         // ...
         // New sign-in will be persisted with session persistence.
         signInWithEmailAndPassword(auth, correo, contraseña)
-          .then((userCredential) => {
-            const { user } = userCredential;
-            console.log(user);
-          })
+          // .then((userCredential) => {
+          //   const { user } = userCredential;
+          //   console.log(user);
+          // })
           .catch((error) => {
             console.log(error);
-            // console.dir(error);
-            // console.log("Nombre del error: ", error.name);
-            // console.log("Código del error: ", error.code);
-            // console.log("Mensaje de error: ", error.message);
             setLoginErrorMessage(true);
           });
       })
       .catch((error) => {
         console.log(error);
-        // // Handle Errors here.
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
       });
   };
 

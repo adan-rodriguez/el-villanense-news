@@ -3,6 +3,7 @@ import TinyMCE from "./TinyMCE";
 
 function AdminForm({ article, handlers, addArticle }) {
   const { title, image, altImage, lead, section } = article;
+
   const {
     handleChangeTitle,
     handleChangeImage,
@@ -11,6 +12,7 @@ function AdminForm({ article, handlers, addArticle }) {
     handleChangeSection,
     getContentTiny,
   } = handlers;
+
   return (
     <form className="form-add-article" onSubmit={addArticle}>
       <div>
@@ -88,7 +90,6 @@ function AdminForm({ article, handlers, addArticle }) {
           </select>
         </label>
       </div>
-      {/* <textarea name="content" id="mytextarea">Hello, World!</textarea> */}
       <TinyMCE getContent={getContentTiny} />
       <button className="btn-upload-article" type="submit">
         Subir artículo
