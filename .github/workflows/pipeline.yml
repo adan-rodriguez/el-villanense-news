@@ -37,7 +37,7 @@ jobs:
     - name: Format 🎨 and Lint 🧹
       run: npx lint-staged
     - name: Unit Testing 🧪
-      run: npm run test-q
+      run: npm test --detectOpenHandles
     - name: E2E Testing 🧪
       run: npm start & wait-on http://localhost:3000 & npm run cy-run
     - name: Install Vercel CLI
