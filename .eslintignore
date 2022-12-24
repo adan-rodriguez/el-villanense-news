@@ -5,5 +5,3 @@
 
 /build/**
 /coverage/**
-# !.eslintrc.js
-# *.test.js
