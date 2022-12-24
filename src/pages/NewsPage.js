@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getADoc } from "../firebase/firebaseService";
 import News from "../components/News";
-import scrollToTop from "../utils/scrollToTop";
+// import scrollToTop from "../utils/scrollToTop";
 
 function NewsPage() {
   const CHARACTERS_ID_FIRESTORE = -20;
@@ -43,7 +43,7 @@ function NewsPage() {
       getNewsFromFirebase();
     }
 
-    scrollToTop();
+    // scrollToTop();
   }, []);
 
   return <News news={news} />;
