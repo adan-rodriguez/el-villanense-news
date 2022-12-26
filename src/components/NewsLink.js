@@ -5,14 +5,13 @@ function NewsLink({
   image,
   altImage,
   title,
-  friendlyUrl,
   datetimeAttribute,
   dateContent,
   section,
-  id,
+  url,
 }) {
   return (
-    <Link className="news-link" to={`/${section}/${friendlyUrl}-${id}`}>
+    <Link className="news-link" to={`/${section}/${url}`}>
       <article>
         <img className="news-img" src={image} alt={altImage} loading="lazy" />
         <time className="news-time" dateTime={datetimeAttribute}>

@@ -21,10 +21,3 @@ test("renderizando una noticia", () => {
   expect(screen.getByAltText(mockNews.altImage)).toBeInTheDocument();
   expect(screen.getByText(mockNews.content)).toBeInTheDocument();
 });
-
-test("renderizar cargando...", () => {
-  const mockNews = null;
-
-  render(<News news={mockNews} />);
-  expect(screen.getByText("Cargando...")).toBeInTheDocument();
-});

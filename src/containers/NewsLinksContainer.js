@@ -11,11 +11,10 @@ function NewsLinksContainer({ news }) {
       {news.map((article) => (
         <NewsLink
           key={article.id}
-          id={article.id}
+          url={article.id}
           image={article.image}
           altImage={article.altImage}
           title={article.title}
-          friendlyUrl={article.friendlyUrl}
           datetimeAttribute={article.datetimeAttribute}
           dateContent={article.dateContent}
           section={article.section}

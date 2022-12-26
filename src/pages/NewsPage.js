@@ -5,9 +5,7 @@ import News from "../components/News";
 // import scrollToTop from "../utils/scrollToTop";
 
 function NewsPage() {
-  const CHARACTERS_ID_FIRESTORE = -20;
-  const { friendlyUrl } = useParams();
-  const id = friendlyUrl.slice(CHARACTERS_ID_FIRESTORE);
+  const { section, newsUrl } = useParams();
 
   const getNewsFromLocalStorage = (key) => {
     const article = JSON.parse(localStorage.getItem(key));
@@ -22,20 +20,26 @@ function NewsPage() {
     const articles = JSON.parse(sessionStorage.getItem("articles"));
     if (articles) {
       const article = articles.find((art) => art.id === key);
-      sendNewsToLocalStorage(article);
-      return article;
+      if (article) {
+        sendNewsToLocalStorage(article);
+        return article;
+      }
     }
     return null;
   };
 
   const [news, setNews] = useState(
-    getNewsFromLocalStorage(id) ?? getNewsFromSessionStorage(id)
+    getNewsFromLocalStorage(newsUrl) ?? getNewsFromSessionStorage(newsUrl)
   );
 
   const getNewsFromFirebase = async () => {
-    const article = await getADoc(id);
-    setNews(article);
-    sendNewsToLocalStorage(article);
+    const article = await getADoc(newsUrl);
+    if (Object.keys(article).length === 1) {
+      setNews("not found");
+    } else {
+      setNews(article);
+      sendNewsToLocalStorage(article);
+    }
   };
 
   useEffect(() => {
@@ -45,6 +49,33 @@ function NewsPage() {
 
     // scrollToTop();
   }, []);
+
+  if (
+    section &&
+    section !== "locales" &&
+    section !== "regionales" &&
+    section !== "provinciales" &&
+    section !== "nacionales" &&
+    section !== "internacionales"
+  ) {
+    return (
+      <div>
+        Sección <strong>&quot;{section}&quot;</strong> no existe
+      </div>
+    );
+  }
+
+  if (!news) {
+    return <div>Cargando...</div>;
+  }
+
+  if (news === "not found") {
+    return (
+      <div>
+        La url <strong>&quot;{newsUrl}&quot;</strong> no existe
+      </div>
+    );
+  }
 
   return <News news={news} />;
 }

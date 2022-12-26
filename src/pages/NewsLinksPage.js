@@ -47,6 +47,21 @@ function NewsLinksPage() {
     // scrollToTop();
   }, [section]);
 
+  if (
+    section &&
+    section !== "locales" &&
+    section !== "regionales" &&
+    section !== "provinciales" &&
+    section !== "nacionales" &&
+    section !== "internacionales"
+  ) {
+    return (
+      <div>
+        Sección <strong>&quot;{section}&quot;</strong> no existe
+      </div>
+    );
+  }
+
   return (
     <>
       {/* <Helmet>

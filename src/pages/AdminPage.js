@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { collection, addDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import AdminForm from "../components/AdminForm";
 import timestampToDatetime from "../utils/timestampToDatetime";
@@ -89,9 +89,10 @@ function AdminPage() {
 
     const dataForFirebase = prepareDataForFirebase(timestamp);
 
-    const articlesCollection = collection(db, "articles");
-
-    await addDoc(articlesCollection, dataForFirebase);
+    await setDoc(
+      doc(db, "articles", `${dataForFirebase.friendlyUrl}-${timestamp}`),
+      dataForFirebase
+    );
 
     sessionStorage.articles && (await sendNewsUploadToSessionStorage());
 

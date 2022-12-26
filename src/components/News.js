@@ -5,10 +5,6 @@ import twitterIcon from "../assets/images/twitter.png";
 import whatsappIcon from "../assets/images/whatsapp.png";
 
 function News({ news }) {
-  if (!news) {
-    return <div>Cargando...</div>;
-  }
-
   return (
     <div className="news-container news-container-article">
       {/* <Helmet>
