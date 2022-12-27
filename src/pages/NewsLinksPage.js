@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NewsLinksContainer from "../containers/NewsLinksContainer";
 import getAllDocs from "../firebase/firebaseService";
-// import scrollToTop from "../utils/scrollToTop";
+import scrollToTop from "../utils/scrollToTop";
 import sortArray from "../utils/sortArray";
 
 function NewsLinksPage() {
@@ -44,7 +44,7 @@ function NewsLinksPage() {
       ? getAllNewsFromFirebase()
       : setNews(getNewsFromSessionStorage());
 
-    // scrollToTop();
+    scrollToTop();
   }, [section]);
 
   if (

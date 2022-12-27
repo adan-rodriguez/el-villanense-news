@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getADoc } from "../firebase/firebaseService";
 import News from "../components/News";
-// import scrollToTop from "../utils/scrollToTop";
+import scrollToTop from "../utils/scrollToTop";
 
 function NewsPage() {
   const { section, newsUrl } = useParams();
@@ -47,7 +47,7 @@ function NewsPage() {
       getNewsFromFirebase();
     }
 
-    // scrollToTop();
+    scrollToTop();
   }, []);
 
   if (
