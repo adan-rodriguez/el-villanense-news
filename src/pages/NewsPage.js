@@ -7,8 +7,8 @@ import scrollToTop from "../utils/scrollToTop";
 function NewsPage() {
   const { section, newsUrl } = useParams();
 
-  const getNewsFromLocalStorage = (key) => {
-    const article = JSON.parse(localStorage.getItem(key));
+  const getNewsFromLocalStorage = (id) => {
+    const article = JSON.parse(localStorage.getItem(id)); // si no existe retorna null
     return article;
   };
 
@@ -16,16 +16,20 @@ function NewsPage() {
     localStorage.setItem(article.id, JSON.stringify(article));
   };
 
-  const getNewsFromSessionStorage = (key) => {
-    const articles = JSON.parse(sessionStorage.getItem("articles"));
-    if (articles) {
-      const article = articles.find((art) => art.id === key);
-      if (article) {
-        sendNewsToLocalStorage(article);
-        return article;
-      }
+  const getNewsFromSessionStorage = (id) => {
+    if (sessionStorage.articles === undefined) {
+      return null;
     }
-    return null;
+
+    const articles = JSON.parse(sessionStorage.getItem("articles"));
+
+    const article = articles.find((art) => art.id === id);
+
+    if (article) {
+      sendNewsToLocalStorage(article);
+    }
+
+    return article; // puede venir con una noticia o undefined
   };
 
   const [news, setNews] = useState(
@@ -34,6 +38,7 @@ function NewsPage() {
 
   const getNewsFromFirebase = async () => {
     const article = await getADoc(newsUrl);
+    // si no existe el documento con el id pasado, firebase devuelve un objeto con una propiedad. Esa propiedad es el id erroneo.
     if (Object.keys(article).length === 1) {
       setNews("not found");
     } else {
@@ -58,26 +63,10 @@ function NewsPage() {
     section !== "nacionales" &&
     section !== "internacionales"
   ) {
-    return (
-      <div>
-        Sección <strong>&quot;{section}&quot;</strong> no existe
-      </div>
-    );
+    return <div>{`Sección "${section}" no existe`}</div>;
   }
 
-  if (!news) {
-    return <div>Cargando...</div>;
-  }
-
-  if (news === "not found") {
-    return (
-      <div>
-        La url <strong>&quot;{newsUrl}&quot;</strong> no existe
-      </div>
-    );
-  }
-
-  return <News news={news} />;
+  return <News news={news} newsUrl={newsUrl} />;
 }
 
 export default NewsPage;

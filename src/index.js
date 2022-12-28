@@ -6,6 +6,8 @@ import "./styles/style.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  // La utilización de Helmet tiene sentido si la página se renderiza del lado del servidor.
+  // TODO: renderizar del lado del servidor
   // <HelmetProvider>
   <BrowserRouter>
     <App />

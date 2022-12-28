@@ -10,13 +10,13 @@ function NewsLinksPage() {
   const { section } = useParams();
 
   const getNewsFromSessionStorage = () => {
-    if (!sessionStorage.articles) {
+    if (sessionStorage.articles === undefined) {
       return null;
     }
 
-    const articles = JSON.parse(sessionStorage.getItem("articles"));
+    const articles = JSON.parse(sessionStorage.getItem("articles")); // se puede acceder a "articles" a través de dot notation o getItem(). La diferencia es que si no existe la dot notation retorna undefined y getItem() retorna null.
 
-    sortArray(articles, "timestamp");
+    sortArray(articles, "timestamp"); // recibe el array a ordenar y el criterio por el que se ordena
 
     if (section) {
       return articles.filter((article) => article.section === section);
@@ -40,7 +40,7 @@ function NewsLinksPage() {
   };
 
   useEffect(() => {
-    !sessionStorage.articles
+    sessionStorage.articles === undefined
       ? getAllNewsFromFirebase()
       : setNews(getNewsFromSessionStorage());
 
@@ -55,11 +55,7 @@ function NewsLinksPage() {
     section !== "nacionales" &&
     section !== "internacionales"
   ) {
-    return (
-      <div>
-        Sección <strong>&quot;{section}&quot;</strong> no existe
-      </div>
-    );
+    return <div>{`Sección "${section}" no existe`}</div>;
   }
 
   return (

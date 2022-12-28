@@ -4,7 +4,15 @@ import facebookIcon from "../assets/images/facebook.png";
 import twitterIcon from "../assets/images/twitter.png";
 import whatsappIcon from "../assets/images/whatsapp.png";
 
-function News({ news }) {
+function News({ news, newsUrl }) {
+  if (!news) {
+    return <div>Cargando...</div>;
+  }
+
+  if (news === "not found") {
+    return <div>{`La url "${newsUrl}" no existe`}</div>;
+  }
+
   return (
     <div className="news-container news-container-article">
       {/* <Helmet>
