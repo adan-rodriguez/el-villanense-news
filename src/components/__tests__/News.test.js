@@ -21,3 +21,18 @@ test("renderizando una noticia", () => {
   expect(screen.getByAltText(mockNews.altImage)).toBeInTheDocument();
   expect(screen.getByText(mockNews.content)).toBeInTheDocument();
 });
+
+test("renderizar cargando noticia", () => {
+  const mockNews = null;
+
+  render(<News news={mockNews} />);
+  expect(screen.getByText("Cargando...")).toBeInTheDocument();
+});
+
+test("renderizar url de noticia no encontrada", () => {
+  const mockNews = "not found";
+  const mockNewsUrl = "bad-url";
+
+  render(<News news={mockNews} newsUrl={mockNewsUrl} />);
+  expect(screen.getByText('La url "bad-url" no existe')).toBeInTheDocument();
+});
