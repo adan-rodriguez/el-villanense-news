@@ -27,6 +27,18 @@ test("landing on a section", () => {
   expect(screen.getByText("Noticias Locales")).toBeInTheDocument();
 });
 
+test("landing on a bad section", () => {
+  const sectionRoute = "/local";
+
+  render(
+    <MemoryRouter initialEntries={[sectionRoute]}>
+      <App />
+    </MemoryRouter>
+  );
+
+  expect(screen.getByText('Sección "local" no existe')).toBeInTheDocument();
+});
+
 test("landing on a bad page", () => {
   const badRoute = "/some/bad/route";
 
