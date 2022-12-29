@@ -36,6 +36,7 @@ jobs:
       run: npm ci
     - name: Format 🎨 and Lint 🧹
       run: npx lint-staged
+    # No logro aún hacer correr los siguientes dos steps. Si corren en el pre-commit de husky. El unit testing se cuelga una vez que pasa todos los tests y no continúa al siguente step. En el e2e testing aún nosé como manejar los datos de inicio de sesión para que permanezcan confidenciales. 
     # - name: Unit Testing
     #   run: npm test
     # - name: E2E Testing 🧪
