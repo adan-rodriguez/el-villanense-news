@@ -16,6 +16,7 @@
     "wait-on": "^7.0.1",
     "web-vitals": "^2.1.4"
   },
+  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -66,5 +67,12 @@
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "src/firebase/",
+      "src/utils/",
+      "src/index.js"
+    ]
   }
 }
