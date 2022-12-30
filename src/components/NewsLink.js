@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function NewsLink({
@@ -22,5 +22,15 @@ function NewsLink({
     </Link>
   );
 }
+
+NewsLink.propTypes = {
+  image: PropTypes.string.isRequired,
+  altImage: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  datetimeAttribute: PropTypes.string.isRequired,
+  dateContent: PropTypes.string.isRequired,
+  section: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+};
 
 export default NewsLink;

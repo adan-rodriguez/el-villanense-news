@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import NewsLink from "../components/NewsLink";
 
 function NewsLinksContainer({ news }) {
@@ -23,5 +23,13 @@ function NewsLinksContainer({ news }) {
     </div>
   );
 }
+
+NewsLinksContainer.propTypes = {
+  news: PropTypes.arrayOf(PropTypes.object.isRequired),
+};
+
+NewsLinksContainer.defaultProps = {
+  news: null,
+};
 
 export default NewsLinksContainer;

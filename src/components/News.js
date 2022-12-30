@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 // import { Helmet } from "react-helmet-async";
+import PropTypes from "prop-types";
 import facebookIcon from "../assets/images/facebook.png";
 import twitterIcon from "../assets/images/twitter.png";
 import whatsappIcon from "../assets/images/whatsapp.png";
@@ -74,5 +74,27 @@ function News({ news, newsUrl }) {
     </div>
   );
 }
+
+News.propTypes = {
+  news: PropTypes.shape({
+    altImage: PropTypes.string,
+    content: PropTypes.string,
+    dateContent: PropTypes.string,
+    datetimeAttribute: PropTypes.string,
+    datetimeContent: PropTypes.string,
+    friendlyUrl: PropTypes.string,
+    id: PropTypes.string,
+    image: PropTypes.string,
+    lead: PropTypes.string,
+    section: PropTypes.string,
+    timestamp: PropTypes.number,
+    title: PropTypes.string,
+  }),
+  newsUrl: PropTypes.string.isRequired,
+};
+
+News.defaultProps = {
+  news: null,
+};
 
 export default News;
