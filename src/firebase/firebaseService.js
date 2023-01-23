@@ -11,7 +11,7 @@ import { db } from "./firebase";
 
 const articlesCollection = collection(db, "articles");
 
-const getAllDocs = async () => {
+const getAllNews = async () => {
   const q = query(articlesCollection, orderBy("timestamp", "desc"));
   const data = await getDocs(q);
   const articles = data.docs.map((art) => ({ ...art.data(), id: art.id }));
@@ -33,4 +33,4 @@ export const getADoc = async (id) => {
   return article;
 };
 
-export default getAllDocs;
+export default getAllNews;

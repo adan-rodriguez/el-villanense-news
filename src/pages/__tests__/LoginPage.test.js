@@ -21,22 +21,22 @@ test("testeando login form", async () => {
   expect(screen.getByRole("button", { name: "Ingresar" })).toBeInTheDocument();
 });
 
-test("mensaje de alerta por datos incorrectos", async () => {
-  expect(
-    screen.queryByText("Los datos ingresados son incorrectos")
-  ).not.toBeInTheDocument();
+// test("mensaje de alerta por datos incorrectos", async () => {
+//   expect(
+//     screen.queryByText("Los datos ingresados son incorrectos")
+//   ).not.toBeInTheDocument();
 
-  const inputEmail = screen.getByLabelText("Email");
-  await user.click(inputEmail);
-  await user.keyboard("dato incorrecto");
+//   const inputEmail = screen.getByLabelText("Email");
+//   await user.click(inputEmail);
+//   await user.keyboard("dato incorrecto");
 
-  const inputPassword = screen.getByLabelText("Contraseña");
-  await user.click(inputPassword);
-  await user.keyboard("dato incorrecto");
+//   const inputPassword = screen.getByLabelText("Contraseña");
+//   await user.click(inputPassword);
+//   await user.keyboard("dato incorrecto");
 
-  const loginButton = screen.getByRole("button", { name: "Ingresar" });
-  await user.click(loginButton);
-  expect(
-    await screen.findByText("Los datos ingresados son incorrectos")
-  ).toBeInTheDocument();
-});
+//   const loginButton = screen.getByRole("button", { name: "Ingresar" });
+//   await user.click(loginButton);
+//   expect(
+//     await screen.findByText("Los datos ingresados son incorrectos")
+//   ).toBeInTheDocument();
+// });

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NewsLinksContainer from "../containers/NewsLinksContainer";
-import getAllDocs from "../firebase/firebaseService";
+import getAllNews from "../firebase/firebaseService";
 import scrollToTop from "../utils/scrollToTop";
 import sortArray from "../utils/sortArray";
 
@@ -32,7 +32,7 @@ function NewsLinksPage() {
   };
 
   const getAllNewsFromFirebase = async () => {
-    const articles = await getAllDocs();
+    const articles = await getAllNews();
     section
       ? setNews(articles.filter((article) => article.section === section))
       : setNews(articles);
