@@ -2,19 +2,14 @@ import PropTypes from "prop-types";
 import TinyMCE from "./TinyMCE";
 
 function AdminForm({ article, handlers, addArticle }) {
-  const { title, image, altImage, lead, section } = article;
-
-  const {
-    handleChangeTitle,
-    handleChangeImage,
-    handleChangeAltImage,
-    handleChangeLead,
-    handleChangeSection,
-    getContentTiny,
-  } = handlers;
-
   return (
-    <form className="form-add-article" onSubmit={addArticle}>
+    <form
+      className="form-add-article"
+      onSubmit={(e) => {
+        e.preventDefault();
+        addArticle();
+      }}
+    >
       <div>
         <label htmlFor="title">
           Título
@@ -24,8 +19,8 @@ function AdminForm({ article, handlers, addArticle }) {
             id="title"
             placeholder="Título"
             required
-            value={title}
-            onChange={handleChangeTitle}
+            value={article.title}
+            onChange={handlers.handleChangeTitle}
           />
         </label>
       </div>
@@ -38,8 +33,8 @@ function AdminForm({ article, handlers, addArticle }) {
             id="image"
             placeholder="URL Imagen"
             required
-            value={image}
-            onChange={handleChangeImage}
+            value={article.image}
+            onChange={handlers.handleChangeImage}
           />
         </label>
       </div>
@@ -52,8 +47,8 @@ function AdminForm({ article, handlers, addArticle }) {
             id="alt-image"
             placeholder="Introduce el texto alternativo..."
             required
-            value={altImage}
-            onChange={handleChangeAltImage}
+            value={article.altImage}
+            onChange={handlers.handleChangeAltImage}
           />
         </label>
       </div>
@@ -66,8 +61,8 @@ function AdminForm({ article, handlers, addArticle }) {
             id="lead"
             placeholder="Entrada"
             required
-            value={lead}
-            onChange={handleChangeLead}
+            value={article.lead}
+            onChange={handlers.handleChangeLead}
             rows="4"
           />
         </label>
@@ -79,8 +74,8 @@ function AdminForm({ article, handlers, addArticle }) {
             name="section"
             id="section"
             required
-            value={section}
-            onChange={handleChangeSection}
+            value={article.section}
+            onChange={handlers.handleChangeSection}
           >
             <option value="locales">Locales</option>
             <option value="regionales">Regionales</option>
@@ -90,7 +85,7 @@ function AdminForm({ article, handlers, addArticle }) {
           </select>
         </label>
       </div>
-      <TinyMCE getContent={getContentTiny} />
+      <TinyMCE getContent={handlers.getContentTiny} />
       <button className="btn-upload-article" type="submit">
         Subir artículo
       </button>

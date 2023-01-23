@@ -3,14 +3,20 @@ import PropTypes from "prop-types";
 function LoginForm({
   email,
   password,
+  loginErrorMessage,
   handleChangeEmail,
   handleChangePassword,
-  handleSubmit,
-  loginErrorMessage,
+  login,
 }) {
   return (
     <>
-      <form className="form-login" onSubmit={handleSubmit}>
+      <form
+        className="form-login"
+        onSubmit={(e) => {
+          e.preventDefault();
+          login();
+        }}
+      >
         <div>
           <label htmlFor="email">
             Email
@@ -55,7 +61,7 @@ LoginForm.propTypes = {
   password: PropTypes.string.isRequired,
   handleChangeEmail: PropTypes.func.isRequired,
   handleChangePassword: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
   loginErrorMessage: PropTypes.bool.isRequired,
 };
 
