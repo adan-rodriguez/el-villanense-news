@@ -12,18 +12,16 @@ function LoginPage() {
     showLoginErrorMessage,
   } = useLogin();
 
-  const login = () => {
-    handleLoginAuthFirebase(email, password, showLoginErrorMessage);
-  };
-
   return (
     <LoginForm
       email={email}
       password={password}
+      loginErrorMessage={loginErrorMessage}
       handleChangeEmail={handleChangeEmail}
       handleChangePassword={handleChangePassword}
-      login={login}
-      loginErrorMessage={loginErrorMessage}
+      login={() =>
+        handleLoginAuthFirebase(email, password, showLoginErrorMessage)
+      }
     />
   );
 }

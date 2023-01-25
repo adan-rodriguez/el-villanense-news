@@ -1,15 +1,15 @@
 import PropTypes from "prop-types";
-import NewsLink from "../components/NewsLink";
+import ArticleLink from "../components/ArticleLink";
 
-function NewsLinksContainer({ news }) {
-  if (!news) {
+function ArticlesLinksContainer({ articles }) {
+  if (!articles) {
     return <div>Cargando...</div>;
   }
 
   return (
     <div className="news-container">
-      {news.map((article) => (
-        <NewsLink
+      {articles.map((article) => (
+        <ArticleLink
           key={article.id}
           url={article.id}
           image={article.image}
@@ -24,12 +24,12 @@ function NewsLinksContainer({ news }) {
   );
 }
 
-NewsLinksContainer.propTypes = {
-  news: PropTypes.arrayOf(PropTypes.object.isRequired),
+ArticlesLinksContainer.propTypes = {
+  articles: PropTypes.arrayOf(PropTypes.object.isRequired),
 };
 
-NewsLinksContainer.defaultProps = {
-  news: null,
+ArticlesLinksContainer.defaultProps = {
+  articles: null,
 };
 
-export default NewsLinksContainer;
+export default ArticlesLinksContainer;

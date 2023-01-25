@@ -1,17 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import AdminForm from "../components/AdminForm";
-import useAdminNews from "../hooks/useAdminNews";
+import useAdmin from "../hooks/useAdmin";
 import addArticleToFirestore from "../utils/addArticleToFirestore";
 
 function AdminPage() {
-  const { article, handlersChangesAdminForm } = useAdminNews();
+  const { article, handlersChangesAdminForm } = useAdmin();
 
   const navigate = useNavigate();
-
-  const addArticle = async () => {
-    await addArticleToFirestore(article);
-    navigate("/");
-  };
 
   return (
     <>
@@ -19,7 +14,11 @@ function AdminPage() {
       <AdminForm
         article={article}
         handlers={handlersChangesAdminForm}
-        addArticle={addArticle}
+        // eslint-disable-next-line no-return-await
+        addArticle={async () => {
+          await addArticleToFirestore(article);
+          navigate("/");
+        }}
       />
     </>
   );

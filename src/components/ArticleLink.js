@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-function NewsLink({
+function ArticleLink({
   image,
   altImage,
   title,
@@ -23,7 +23,7 @@ function NewsLink({
   );
 }
 
-NewsLink.propTypes = {
+ArticleLink.propTypes = {
   image: PropTypes.string.isRequired,
   altImage: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -33,4 +33,4 @@ NewsLink.propTypes = {
   url: PropTypes.string.isRequired,
 };
 
-export default NewsLink;
+export default ArticleLink;

@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
-import NewsLinksPage from "./pages/NewsLinksPage";
-import NewsPage from "./pages/NewsPage";
+import ArticlesLinksPage from "./pages/ArticlesLinksPage";
+import ArticlePage from "./pages/ArticlePage";
 import Layout from "./Layout";
 import AdminPage from "./pages/AdminPage";
 import LoginPage from "./pages/LoginPage";
@@ -28,7 +28,7 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<NewsLinksPage />} />
+        <Route path="/" element={<ArticlesLinksPage />} />
         <Route
           path="login"
           element={
@@ -41,8 +41,8 @@ function App() {
             isUserLogged ? <AdminPage /> : <Navigate to="/login" replace />
           }
         />
-        <Route path=":section" element={<NewsLinksPage />} />
-        <Route path=":section/:newsUrl" element={<NewsPage />} />
+        <Route path=":section" element={<ArticlesLinksPage />} />
+        <Route path=":section/:articleUrl" element={<ArticlePage />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Route>
     </Routes>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function useAdminNews() {
+function useAdmin() {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [altImage, setAltImage] = useState("");
@@ -44,4 +44,4 @@ function useAdminNews() {
   };
 }
 
-export default useAdminNews;
+export default useAdmin;

@@ -1,6 +1,6 @@
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-import { getLastNews } from "../firebase/firebaseService";
+import { getLastArticle } from "../firebase/firebaseService";
 import getFriendlyUrl from "./getFriendlyUrl";
 import timestampToDatetime from "./timestampToDatetime";
 
@@ -15,8 +15,8 @@ const prepareDataForFirebase = (article, timestamp) => {
   return dataForFirebase;
 };
 
-const sendNewsUploadToSessionStorage = async () => {
-  const articleUpload = await getLastNews();
+const sendArticleUploadToSessionStorage = async () => {
+  const articleUpload = await getLastArticle();
   const articles = JSON.parse(sessionStorage.getItem("articles"));
   articles.unshift(articleUpload);
   sessionStorage.setItem("articles", JSON.stringify(articles));
@@ -34,7 +34,7 @@ const addArticleToFirestore = async (article) => {
     dataForFirebase
   );
 
-  sessionStorage.articles && (await sendNewsUploadToSessionStorage());
+  sessionStorage.articles && (await sendArticleUploadToSessionStorage());
 };
 
 export default addArticleToFirestore;

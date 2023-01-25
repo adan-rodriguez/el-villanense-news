@@ -4,13 +4,13 @@ import facebookIcon from "../assets/images/facebook.png";
 import twitterIcon from "../assets/images/twitter.png";
 import whatsappIcon from "../assets/images/whatsapp.png";
 
-function News({ news, newsUrl }) {
-  if (!news) {
+function Article({ article }) {
+  if (!article) {
     return <div>Cargando...</div>;
   }
 
-  if (news === "not found") {
-    return <div>{`La url "${newsUrl}" no existe`}</div>;
+  if (Object.keys(article).length === 1) {
+    return <div>{`La url "${article.id}" no existe`}</div>;
   }
 
   return (
@@ -27,7 +27,7 @@ function News({ news, newsUrl }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet> */}
       <article className="article-container">
-        <h1>{news.title}</h1>
+        <h1>{article.title}</h1>
         <div className="share-social-container">
           {/* Estos enlaces no funcionan porque la página se debe renderizar del lado del servidor
           TODO: RENDERIZAR DEL LADO DEL SERVIDOR EN EL FUTURO */}
@@ -40,7 +40,7 @@ function News({ news, newsUrl }) {
             <img width={30} height={30} src={facebookIcon} alt="Facebook" />
           </a>
           <a
-            href={`https://twitter.com/intent/tweet?text=${news.title}&url=${window.location.href}`}
+            href={`https://twitter.com/intent/tweet?text=${article.title}&url=${window.location.href}`}
             target="_blank"
             title="Compartir en Twitter"
             rel="noreferrer"
@@ -56,18 +56,18 @@ function News({ news, newsUrl }) {
             <img width={30} height={30} src={whatsappIcon} alt="Whatsapp" />
           </a>
         </div>
-        <time className="article-time" dateTime={news.datetimeAttribute}>
-          {news.datetimeContent}
+        <time className="article-time" dateTime={article.datetimeAttribute}>
+          {article.datetimeContent}
         </time>
-        <p className="lead-article">{news.lead}</p>
+        <p className="lead-article">{article.lead}</p>
         <img
           className="news-img news-img-bigger"
-          src={news.image}
-          alt={news.altImage}
+          src={article.image}
+          alt={article.altImage}
           loading="lazy"
         />
         <div
-          dangerouslySetInnerHTML={{ __html: news.content }}
+          dangerouslySetInnerHTML={{ __html: article.content }}
           className="content-article"
         />
       </article>
@@ -75,8 +75,8 @@ function News({ news, newsUrl }) {
   );
 }
 
-News.propTypes = {
-  news: PropTypes.shape({
+Article.propTypes = {
+  article: PropTypes.shape({
     altImage: PropTypes.string,
     content: PropTypes.string,
     dateContent: PropTypes.string,
@@ -90,11 +90,10 @@ News.propTypes = {
     timestamp: PropTypes.number,
     title: PropTypes.string,
   }),
-  newsUrl: PropTypes.string.isRequired,
 };
 
-News.defaultProps = {
-  news: null,
+Article.defaultProps = {
+  article: null,
 };
 
-export default News;
+export default Article;

@@ -15,7 +15,7 @@ test("links a las redes sociales de la página", () => {
 });
 
 test("imágenes de los links a las redes sociales de la página", () => {
-  const altsImgs = ["Facebook", "Instagram", "Twitter"];
+  const altsImgs = ["Logo de Facebook", "Logo de Instagram", "Logo de Twitter"];
   altsImgs.forEach((altImg) => {
     expect(screen.getByAltText(altImg)).toBeInTheDocument();
   });

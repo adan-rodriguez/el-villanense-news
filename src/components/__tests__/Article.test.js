@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import News from "../News";
+import Article from "../Article";
 
 test("renderizando una noticia", () => {
-  const mockNews = {
+  const mockArticle = {
     title:
       "La inflación se aceleró a 3,8% en diciembre y acumuló 50,9% en 2021",
     image: "https://www.elvillanense.com.ar/img/inflacion.jpg",
@@ -14,25 +14,24 @@ test("renderizando una noticia", () => {
     datetimeContent: "20 de Diciembre de 2022 - 17:39",
   };
 
-  render(<News news={mockNews} />);
-  expect(screen.getByText(mockNews.title)).toBeInTheDocument();
-  expect(screen.getByText(mockNews.datetimeContent)).toBeInTheDocument();
-  expect(screen.getByText(mockNews.lead)).toBeInTheDocument();
-  expect(screen.getByAltText(mockNews.altImage)).toBeInTheDocument();
-  expect(screen.getByText(mockNews.content)).toBeInTheDocument();
+  render(<Article article={mockArticle} />);
+  expect(screen.getByText(mockArticle.title)).toBeInTheDocument();
+  expect(screen.getByText(mockArticle.datetimeContent)).toBeInTheDocument();
+  expect(screen.getByText(mockArticle.lead)).toBeInTheDocument();
+  expect(screen.getByAltText(mockArticle.altImage)).toBeInTheDocument();
+  expect(screen.getByText(mockArticle.content)).toBeInTheDocument();
 });
 
 test("renderizar cargando noticia", () => {
-  const mockNews = null;
+  const mockArticle = null;
 
-  render(<News news={mockNews} />);
+  render(<Article article={mockArticle} />);
   expect(screen.getByText("Cargando...")).toBeInTheDocument();
 });
 
 test("renderizar url de noticia no encontrada", () => {
-  const mockNews = "not found";
-  const mockNewsUrl = "bad-url";
+  const mockArticle = { id: "badURL" };
 
-  render(<News news={mockNews} newsUrl={mockNewsUrl} />);
-  expect(screen.getByText('La url "bad-url" no existe')).toBeInTheDocument();
+  render(<Article article={mockArticle} />);
+  expect(screen.getByText('La url "badURL" no existe')).toBeInTheDocument();
 });

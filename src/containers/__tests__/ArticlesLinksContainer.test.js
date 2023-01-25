@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import NewsLinksContainer from "../NewsLinksContainer";
+import ArticlesLinksContainer from "../ArticlesLinksContainer";
 
 test("renderizando un link de noticia", () => {
-  const mockNews = [
+  const mockArticles = [
     {
       id: "3P97vs9KIRmjqopudTyL",
       title: "Autorizaron el uso de cuatro test de autoevaluación",
@@ -17,17 +17,17 @@ test("renderizando un link de noticia", () => {
     },
   ];
 
-  render(<NewsLinksContainer news={mockNews} />, {
+  render(<ArticlesLinksContainer articles={mockArticles} />, {
     wrapper: BrowserRouter,
   });
-  expect(screen.getByAltText(mockNews[0].altImage)).toBeInTheDocument();
-  expect(screen.getByText(mockNews[0].dateContent)).toBeInTheDocument();
-  expect(screen.getByText(mockNews[0].title)).toBeInTheDocument();
+  expect(screen.getByAltText(mockArticles[0].altImage)).toBeInTheDocument();
+  expect(screen.getByText(mockArticles[0].dateContent)).toBeInTheDocument();
+  expect(screen.getByText(mockArticles[0].title)).toBeInTheDocument();
 });
 
 test("renderizar cargando...", () => {
-  const mockNews = null;
+  const mockArticles = null;
 
-  render(<NewsLinksContainer news={mockNews} />);
+  render(<ArticlesLinksContainer articles={mockArticles} />);
   expect(screen.getByText("Cargando...")).toBeInTheDocument();
 });

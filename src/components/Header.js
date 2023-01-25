@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import menuIcon from "../assets/images/menu-icon.svg";
 import closeIcon from "../assets/images/close-icon.svg";
 import Logo from "./Logo";
 import SocialMedia from "./SocialMedia";
+import NavLink from "./NavLink";
+
+const links = [
+  { to: "/", text: "Inicio" },
+  { to: "locales", text: "Locales" },
+  { to: "regionales", text: "Regionales" },
+  { to: "provinciales", text: "Provinciales" },
+  { to: "nacionales", text: "Nacionales" },
+  { to: "internacionales", text: "Internacionales" },
+];
 
 function Header() {
   const [menuopen, setMenuopen] = useState(false);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
 
-  const getInnerWidth = () => {
-    setInnerWidth(window.innerWidth);
-  };
-
   useEffect(() => {
-    window.addEventListener("resize", getInnerWidth);
     if (menuopen) {
       document.querySelector(".open-menu").style.display = "none";
       document.querySelector(".top-navbar").style.display = "flex";
@@ -24,7 +28,29 @@ function Header() {
       document.querySelector(".top-navbar").style.display = "";
       document.body.style.overflowY = "";
     }
+
+    const handleResize = () => {
+      if (window.innerWidth > 992) {
+        setMenuopen(false);
+      }
+    };
+
+    if (menuopen) {
+      window.addEventListener("resize", handleResize);
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [menuopen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setInnerWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+  }, []);
 
   return (
     <header className="top-header">
@@ -49,66 +75,16 @@ function Header() {
           </button>
           <nav>
             <ul>
-              <li>
-                <Link
-                  {...(innerWidth < 992 && {
-                    onClick: () => setMenuopen(!menuopen),
-                  })}
-                  to="/"
-                >
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  {...(innerWidth < 992 && {
-                    onClick: () => setMenuopen(!menuopen),
-                  })}
-                  to="locales"
-                >
-                  Locales
-                </Link>
-              </li>
-              <li>
-                <Link
-                  {...(innerWidth < 992 && {
-                    onClick: () => setMenuopen(!menuopen),
-                  })}
-                  to="regionales"
-                >
-                  Regionales
-                </Link>
-              </li>
-              <li>
-                <Link
-                  {...(innerWidth < 992 && {
-                    onClick: () => setMenuopen(!menuopen),
-                  })}
-                  to="provinciales"
-                >
-                  Provinciales
-                </Link>
-              </li>
-              <li>
-                <Link
-                  {...(innerWidth < 992 && {
-                    onClick: () => setMenuopen(!menuopen),
-                  })}
-                  to="nacionales"
-                >
-                  Nacionales
-                </Link>
-              </li>
-              <li>
-                <Link
-                  {...(innerWidth < 992 && {
-                    onClick: () => setMenuopen(!menuopen),
-                  })}
-                  to="internacionales"
-                >
-                  Internacionales
-                </Link>
-              </li>
+              {links.map(({ to, text }) => (
+                <NavLink
+                  key={text}
+                  innerWidth={innerWidth}
+                  menuopen={menuopen}
+                  setMenuopen={setMenuopen}
+                  to={to}
+                  text={text}
+                />
+              ))}
             </ul>
           </nav>
           <SocialMedia className="social-nav" />

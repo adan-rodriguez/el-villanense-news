@@ -1,13 +1,8 @@
+import getCurrentYear from "../utils/getCurrentYear";
 import Logo from "./Logo";
 import SocialMedia from "./SocialMedia";
 
 function Footer() {
-  const getCurrentYear = () => {
-    const currentTime = new Date();
-    const year = currentTime.getFullYear();
-    return year;
-  };
-
   return (
     <footer className="footer">
       <SocialMedia className="social-footer" />
