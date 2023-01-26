@@ -17,22 +17,12 @@ function useAdmin() {
     content,
   };
 
-  const handlersChangesAdminForm = {
-    handleChangeTitle(e) {
-      setTitle(e.target.value);
-    },
-    handleChangeImage(e) {
-      setImage(e.target.value);
-    },
-    handleChangeAltImage(e) {
-      setAltImage(e.target.value);
-    },
-    handleChangeLead(e) {
-      setLead(e.target.value);
-    },
-    handleChangeSection(e) {
-      setSection(e.target.value);
-    },
+  const settersArticle = {
+    setTitle,
+    setImage,
+    setAltImage,
+    setLead,
+    setSection,
     async getContentTiny(contentTiny) {
       setContent(contentTiny);
     },
@@ -40,7 +30,7 @@ function useAdmin() {
 
   return {
     article,
-    handlersChangesAdminForm,
+    settersArticle,
   };
 }
 

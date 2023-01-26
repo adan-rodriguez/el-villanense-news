@@ -20,17 +20,14 @@ function ArticlesLinksPage() {
   const { section } = useParams();
 
   const [articles, setArticles] = useState(() => {
-    if (sessionStorage.articles) {
-      const arts = getArticlesFromSessionStorage();
-      if (section) {
-        const artsSection = arts.filter(
-          (article) => article.section === section
-        );
-        return artsSection;
-      }
-      return arts;
+    if (!sessionStorage.articles) return null;
+
+    const arts = getArticlesFromSessionStorage();
+    if (section) {
+      const artsSection = arts.filter((article) => article.section === section);
+      return artsSection;
     }
-    return null;
+    return arts;
   });
 
   useEffect(() => {

@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import PropTypes from "prop-types";
 import TinyMCE from "./TinyMCE";
 
-function AdminForm({ article, handlers, addArticle }) {
+function AdminForm({ article, settersArticle, addArticle }) {
   return (
     <form
       className="form-add-article"
@@ -20,7 +21,7 @@ function AdminForm({ article, handlers, addArticle }) {
             placeholder="Título"
             required
             value={article.title}
-            onChange={handlers.handleChangeTitle}
+            onChange={(e) => settersArticle.setTitle(e.target.value)}
           />
         </label>
       </div>
@@ -34,7 +35,7 @@ function AdminForm({ article, handlers, addArticle }) {
             placeholder="URL Imagen"
             required
             value={article.image}
-            onChange={handlers.handleChangeImage}
+            onChange={(e) => settersArticle.setImage(e.target.value)}
           />
         </label>
       </div>
@@ -48,7 +49,7 @@ function AdminForm({ article, handlers, addArticle }) {
             placeholder="Introduce el texto alternativo..."
             required
             value={article.altImage}
-            onChange={handlers.handleChangeAltImage}
+            onChange={(e) => settersArticle.setAltImage(e.target.value)}
           />
         </label>
       </div>
@@ -62,7 +63,7 @@ function AdminForm({ article, handlers, addArticle }) {
             placeholder="Entrada"
             required
             value={article.lead}
-            onChange={handlers.handleChangeLead}
+            onChange={(e) => settersArticle.setLead(e.target.value)}
             rows="4"
           />
         </label>
@@ -75,7 +76,7 @@ function AdminForm({ article, handlers, addArticle }) {
             id="section"
             required
             value={article.section}
-            onChange={handlers.handleChangeSection}
+            onChange={(e) => settersArticle.setSection(e.target.value)}
           >
             <option value="locales">Locales</option>
             <option value="regionales">Regionales</option>
@@ -85,7 +86,7 @@ function AdminForm({ article, handlers, addArticle }) {
           </select>
         </label>
       </div>
-      <TinyMCE getContent={handlers.getContentTiny} />
+      <TinyMCE getContentTiny={settersArticle.getContentTiny} />
       <button className="btn-upload-article" type="submit">
         Subir artículo
       </button>
@@ -95,7 +96,6 @@ function AdminForm({ article, handlers, addArticle }) {
 
 AdminForm.propTypes = {
   article: PropTypes.objectOf(PropTypes.string).isRequired,
-  handlers: PropTypes.objectOf(PropTypes.func).isRequired,
   addArticle: PropTypes.func.isRequired,
 };
 

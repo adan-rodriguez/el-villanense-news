@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import PropTypes from "prop-types";
 
 function LoginForm({
   email,
   password,
   loginErrorMessage,
-  handleChangeEmail,
-  handleChangePassword,
+  setEmail,
+  setPassword,
   login,
 }) {
   return (
@@ -25,7 +26,7 @@ function LoginForm({
               name="email"
               id="email"
               value={email}
-              onChange={handleChangeEmail}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </label>
@@ -38,7 +39,7 @@ function LoginForm({
               name="password"
               id="password"
               value={password}
-              onChange={handleChangePassword}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </label>
@@ -59,8 +60,6 @@ function LoginForm({
 LoginForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
-  handleChangeEmail: PropTypes.func.isRequired,
-  handleChangePassword: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   loginErrorMessage: PropTypes.bool.isRequired,
 };

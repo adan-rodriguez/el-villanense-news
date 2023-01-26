@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { /* useRef */ useState, useEffect } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-function TinyMCE({ getContent }) {
+function TinyMCE({ getContentTiny }) {
   const [value, setValue] = useState("");
   //   const editorRef = useRef(null);
   //   const log = () => {
@@ -12,7 +12,7 @@ function TinyMCE({ getContent }) {
   //   };
 
   useEffect(() => {
-    getContent(value);
+    getContentTiny(value);
   }, [value]);
 
   return (
@@ -58,7 +58,7 @@ function TinyMCE({ getContent }) {
 }
 
 TinyMCE.propTypes = {
-  getContent: PropTypes.func.isRequired,
+  getContentTiny: PropTypes.func.isRequired,
 };
 
 export default TinyMCE;

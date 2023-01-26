@@ -7,9 +7,9 @@ function LoginPage() {
     email,
     password,
     loginErrorMessage,
-    handleChangeEmail,
-    handleChangePassword,
-    showLoginErrorMessage,
+    setEmail,
+    setPassword,
+    setLoginErrorMessage,
   } = useLogin();
 
   return (
@@ -17,10 +17,10 @@ function LoginPage() {
       email={email}
       password={password}
       loginErrorMessage={loginErrorMessage}
-      handleChangeEmail={handleChangeEmail}
-      handleChangePassword={handleChangePassword}
+      setEmail={setEmail}
+      setPassword={setPassword}
       login={() =>
-        handleLoginAuthFirebase(email, password, showLoginErrorMessage)
+        handleLoginAuthFirebase(email, password, setLoginErrorMessage)
       }
     />
   );

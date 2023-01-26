@@ -5,7 +5,11 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
-const handleLoginAuthFirebase = (email, password, showLoginErrorMessage) => {
+const handleLoginAuthFirebase = (
+  email,
+  password,
+  /* showLoginErrorMessage, */ setLoginErrorMessage
+) => {
   // signInWithEmailAndPassword(auth, email, password)
   //   .then((userCredential) => {
   //     const { user } = userCredential;
@@ -29,7 +33,8 @@ const handleLoginAuthFirebase = (email, password, showLoginErrorMessage) => {
         // })
         .catch((error) => {
           console.log(error);
-          showLoginErrorMessage();
+          // showLoginErrorMessage();
+          setLoginErrorMessage(true);
         });
     })
     .catch((error) => {

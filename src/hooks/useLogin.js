@@ -5,25 +5,13 @@ function useLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const showLoginErrorMessage = () => {
-    setLoginErrorMessage(true);
-  };
-
   return {
     email,
     password,
     loginErrorMessage,
-    handleChangeEmail,
-    handleChangePassword,
-    showLoginErrorMessage,
+    setEmail,
+    setPassword,
+    setLoginErrorMessage,
   };
 }
 

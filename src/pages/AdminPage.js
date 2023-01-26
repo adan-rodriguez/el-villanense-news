@@ -4,7 +4,7 @@ import useAdmin from "../hooks/useAdmin";
 import addArticleToFirestore from "../utils/addArticleToFirestore";
 
 function AdminPage() {
-  const { article, handlersChangesAdminForm } = useAdmin();
+  const { article, settersArticle } = useAdmin();
 
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ function AdminPage() {
       <h1 className="title-new-article">Nuevo artículo</h1>
       <AdminForm
         article={article}
-        handlers={handlersChangesAdminForm}
+        settersArticle={settersArticle}
         // eslint-disable-next-line no-return-await
         addArticle={async () => {
           await addArticleToFirestore(article);
