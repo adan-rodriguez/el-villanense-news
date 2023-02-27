@@ -90,8 +90,9 @@ button {
   margin-bottom: 30px;
 }
 
-.social-nav a {
-  margin: 0 10px;
+.social-nav {
+  display: flex;
+  column-gap: 10px;
 }
 
 /*----------------- MAIN ----------------------*/
@@ -254,6 +255,7 @@ button {
 .title-new-article {
   text-align: center;
 }
+
 .form-add-article {
   width: 90%;
   margin: 0 auto 20px;
@@ -368,16 +370,13 @@ button {
   .social-nav {
     position: fixed;
     left: 0;
-    top: 40%;
+    top: calc(50vh - 65px);
     background-color: black;
-    display: flex;
     flex-direction: column;
+    column-gap: 0;
+    row-gap: 10px;
     border-radius: 0 10px 10px 0;
     padding: 10px 2px;
-  }
-
-  .social-nav a {
-    margin: 0;
   }
 
   .social-nav a:hover {
