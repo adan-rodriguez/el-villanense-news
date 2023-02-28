@@ -5,11 +5,11 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
-const handleLoginAuthFirebase = (
+export default function handleLoginAuthFirebase(
   email,
   password,
-  /* showLoginErrorMessage, */ setLoginErrorMessage
-) => {
+  handleChangeShowLoginErrorMessage
+) {
   // signInWithEmailAndPassword(auth, email, password)
   //   .then((userCredential) => {
   //     const { user } = userCredential;
@@ -33,13 +33,10 @@ const handleLoginAuthFirebase = (
         // })
         .catch((error) => {
           console.log(error);
-          // showLoginErrorMessage();
-          setLoginErrorMessage(true);
+          handleChangeShowLoginErrorMessage();
         });
     })
     .catch((error) => {
       console.log(error);
     });
-};
-
-export default handleLoginAuthFirebase;
+}

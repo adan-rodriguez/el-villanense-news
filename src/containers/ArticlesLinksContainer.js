@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import ArticleLink from "../components/ArticleLink";
 
-function ArticlesLinksContainer({ articles }) {
-  if (!articles) {
+export default function ArticlesLinksContainer({ articles }) {
+  if (articles.length === 0) {
     return <div>Cargando...</div>;
   }
 
@@ -29,7 +29,5 @@ ArticlesLinksContainer.propTypes = {
 };
 
 ArticlesLinksContainer.defaultProps = {
-  articles: null,
+  articles: [],
 };
-
-export default ArticlesLinksContainer;

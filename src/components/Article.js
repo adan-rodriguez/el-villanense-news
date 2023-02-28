@@ -4,13 +4,13 @@ import facebookIcon from "../assets/images/facebook.png";
 import twitterIcon from "../assets/images/twitter.png";
 import whatsappIcon from "../assets/images/whatsapp.png";
 
-function Article({ article }) {
+function Article({ article, articleUrl }) {
   if (!article) {
-    return <div>Cargando...</div>;
+    return <div>{`La url "${articleUrl}" no existe`}</div>;
   }
 
-  if (Object.keys(article).length === 1) {
-    return <div>{`La url "${article.id}" no existe`}</div>;
+  if (Object.keys(article).length === 0) {
+    return <div>Cargando...</div>;
   }
 
   return (
@@ -90,10 +90,11 @@ Article.propTypes = {
     timestamp: PropTypes.number,
     title: PropTypes.string,
   }),
+  articleUrl: PropTypes.string.isRequired,
 };
 
 Article.defaultProps = {
-  article: null,
+  article: {},
 };
 
 export default Article;

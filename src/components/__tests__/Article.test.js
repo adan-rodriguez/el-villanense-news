@@ -23,15 +23,18 @@ test("renderizando una noticia", () => {
 });
 
 test("renderizar cargando noticia", () => {
-  const mockArticle = null;
+  const mockArticle = {};
 
   render(<Article article={mockArticle} />);
   expect(screen.getByText("Cargando...")).toBeInTheDocument();
 });
 
 test("renderizar url de noticia no encontrada", () => {
-  const mockArticle = { id: "badURL" };
+  const mockArticle = null;
+  const articleUrl = "badUrl";
 
-  render(<Article article={mockArticle} />);
-  expect(screen.getByText('La url "badURL" no existe')).toBeInTheDocument();
+  render(<Article article={mockArticle} articleUrl={articleUrl} />);
+  expect(
+    screen.getByText(`La url "${articleUrl}" no existe`)
+  ).toBeInTheDocument();
 });

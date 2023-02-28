@@ -1,5 +1,3 @@
-const scrollToTop = () => {
+export default function scrollToTop() {
   window.scrollTo(0, 0);
-};
-
-export default scrollToTop;
+}

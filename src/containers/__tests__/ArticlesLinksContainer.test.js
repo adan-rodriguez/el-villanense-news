@@ -26,7 +26,7 @@ test("renderizando un link de noticia", () => {
 });
 
 test("renderizar cargando...", () => {
-  const mockArticles = null;
+  const mockArticles = [];
 
   render(<ArticlesLinksContainer articles={mockArticles} />);
   expect(screen.getByText("Cargando...")).toBeInTheDocument();

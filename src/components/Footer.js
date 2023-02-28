@@ -2,7 +2,7 @@ import getCurrentYear from "../utils/getCurrentYear";
 import Logo from "./Logo";
 import SocialMedia from "./SocialMedia";
 
-function Footer() {
+export default function Footer() {
   return (
     <footer className="footer">
       <SocialMedia className="social-footer" />
@@ -31,5 +31,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

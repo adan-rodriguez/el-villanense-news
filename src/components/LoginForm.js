@@ -1,12 +1,11 @@
-/* eslint-disable react/prop-types */
 import PropTypes from "prop-types";
 
-function LoginForm({
+export default function LoginForm({
   email,
   password,
-  loginErrorMessage,
-  setEmail,
-  setPassword,
+  showLoginErrorMessage,
+  handleChangeEmail,
+  handleChangePassword,
   login,
 }) {
   return (
@@ -26,7 +25,7 @@ function LoginForm({
               name="email"
               id="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChangeEmail}
               required
             />
           </label>
@@ -39,7 +38,7 @@ function LoginForm({
               name="password"
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleChangePassword}
               required
             />
           </label>
@@ -48,7 +47,7 @@ function LoginForm({
           Ingresar
         </button>
       </form>
-      {loginErrorMessage && (
+      {showLoginErrorMessage && (
         <p className="login-error-message" role="alert">
           Los datos ingresados son incorrectos
         </p>
@@ -60,8 +59,8 @@ function LoginForm({
 LoginForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
+  showLoginErrorMessage: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
-  loginErrorMessage: PropTypes.bool.isRequired,
+  handleChangeEmail: PropTypes.func.isRequired,
+  handleChangePassword: PropTypes.func.isRequired,
 };
-
-export default LoginForm;

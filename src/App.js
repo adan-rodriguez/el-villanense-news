@@ -1,29 +1,13 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import { useState } from "react";
 import ArticlesLinksPage from "./pages/ArticlesLinksPage";
 import ArticlePage from "./pages/ArticlePage";
 import Layout from "./Layout";
 import AdminPage from "./pages/AdminPage";
 import LoginPage from "./pages/LoginPage";
-import { auth } from "./firebase/firebase";
+import useLoginAuth from "./hooks/useLoginAuth";
 
 function App() {
-  const [isUserLogged, setIsUserLogged] = useState(false);
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setIsUserLogged(true);
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      //   const uid = user.uid;
-      // ...
-    } else {
-      // User is signed out
-      // ...
-      setIsUserLogged(false);
-    }
-  });
+  const { isUserLogged } = useLoginAuth();
 
   return (
     <Routes>

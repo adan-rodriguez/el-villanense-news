@@ -1,26 +1,30 @@
 import LoginForm from "../components/LoginForm";
-import useLogin from "../hooks/useLogin";
+import useLoginForm from "../hooks/useLoginForm";
 import handleLoginAuthFirebase from "../utils/handleLoginAuthFirebase";
 
 function LoginPage() {
   const {
     email,
     password,
-    loginErrorMessage,
-    setEmail,
-    setPassword,
-    setLoginErrorMessage,
-  } = useLogin();
+    showLoginErrorMessage,
+    handleChangeEmail,
+    handleChangePassword,
+    handleChangeShowLoginErrorMessage,
+  } = useLoginForm();
 
   return (
     <LoginForm
       email={email}
       password={password}
-      loginErrorMessage={loginErrorMessage}
-      setEmail={setEmail}
-      setPassword={setPassword}
+      showLoginErrorMessage={showLoginErrorMessage}
+      handleChangeEmail={handleChangeEmail}
+      handleChangePassword={handleChangePassword}
       login={() =>
-        handleLoginAuthFirebase(email, password, setLoginErrorMessage)
+        handleLoginAuthFirebase(
+          email,
+          password,
+          handleChangeShowLoginErrorMessage
+        )
       }
     />
   );

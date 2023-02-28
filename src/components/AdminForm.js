@@ -1,8 +1,20 @@
-/* eslint-disable react/prop-types */
 import PropTypes from "prop-types";
 import TinyMCE from "./TinyMCE";
 
-function AdminForm({ article, settersArticle, addArticle }) {
+export default function AdminForm({
+  title,
+  image,
+  altImage,
+  lead,
+  section,
+  handleChangeTitle,
+  handleChangeImage,
+  handleChangeAltImage,
+  handleChangeLead,
+  handleChangeSection,
+  getContentTiny,
+  addArticle,
+}) {
   return (
     <form
       className="form-add-article"
@@ -20,8 +32,8 @@ function AdminForm({ article, settersArticle, addArticle }) {
             id="title"
             placeholder="Título"
             required
-            value={article.title}
-            onChange={(e) => settersArticle.setTitle(e.target.value)}
+            value={title}
+            onChange={handleChangeTitle}
           />
         </label>
       </div>
@@ -34,8 +46,8 @@ function AdminForm({ article, settersArticle, addArticle }) {
             id="image"
             placeholder="URL Imagen"
             required
-            value={article.image}
-            onChange={(e) => settersArticle.setImage(e.target.value)}
+            value={image}
+            onChange={handleChangeImage}
           />
         </label>
       </div>
@@ -48,8 +60,8 @@ function AdminForm({ article, settersArticle, addArticle }) {
             id="alt-image"
             placeholder="Introduce el texto alternativo..."
             required
-            value={article.altImage}
-            onChange={(e) => settersArticle.setAltImage(e.target.value)}
+            value={altImage}
+            onChange={handleChangeAltImage}
           />
         </label>
       </div>
@@ -62,8 +74,8 @@ function AdminForm({ article, settersArticle, addArticle }) {
             id="lead"
             placeholder="Entrada"
             required
-            value={article.lead}
-            onChange={(e) => settersArticle.setLead(e.target.value)}
+            value={lead}
+            onChange={handleChangeLead}
             rows="4"
           />
         </label>
@@ -75,8 +87,8 @@ function AdminForm({ article, settersArticle, addArticle }) {
             name="section"
             id="section"
             required
-            value={article.section}
-            onChange={(e) => settersArticle.setSection(e.target.value)}
+            value={section}
+            onChange={handleChangeSection}
           >
             <option value="locales">Locales</option>
             <option value="regionales">Regionales</option>
@@ -86,7 +98,7 @@ function AdminForm({ article, settersArticle, addArticle }) {
           </select>
         </label>
       </div>
-      <TinyMCE getContentTiny={settersArticle.getContentTiny} />
+      <TinyMCE getContentTiny={getContentTiny} />
       <button className="btn-upload-article" type="submit">
         Subir artículo
       </button>
@@ -95,8 +107,17 @@ function AdminForm({ article, settersArticle, addArticle }) {
 }
 
 AdminForm.propTypes = {
-  article: PropTypes.objectOf(PropTypes.string).isRequired,
+  // article: PropTypes.objectOf(PropTypes.string).isRequired,
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  altImage: PropTypes.string.isRequired,
+  lead: PropTypes.string.isRequired,
+  section: PropTypes.string.isRequired,
+  handleChangeTitle: PropTypes.func.isRequired,
+  handleChangeImage: PropTypes.func.isRequired,
+  handleChangeAltImage: PropTypes.func.isRequired,
+  handleChangeLead: PropTypes.func.isRequired,
+  handleChangeSection: PropTypes.func.isRequired,
+  getContentTiny: PropTypes.func.isRequired,
   addArticle: PropTypes.func.isRequired,
 };
-
-export default AdminForm;

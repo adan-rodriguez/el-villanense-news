@@ -1,54 +1,12 @@
 // import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ArticlesLinksContainer from "../containers/ArticlesLinksContainer";
-import getAllArticles from "../firebase/firebaseService";
-import scrollToTop from "../utils/scrollToTop";
+import useArticlesLinks from "../hooks/useArticlesLinks";
 
-const getArticlesFromSessionStorage = () =>
-  JSON.parse(sessionStorage.getItem("articles")); // se puede acceder a "articles" a través de dot notation o getItem(). La diferencia es que si no existe la dot notation retorna undefined y getItem() retorna null.
-
-const sendArticlesToSessionStorage = (arts) =>
-  sessionStorage.setItem("articles", JSON.stringify(arts));
-
-const getAllArticlesFromFirebase = async () => {
-  const arts = await getAllArticles();
-  return arts;
-};
-
-function ArticlesLinksPage() {
+export default function ArticlesLinksPage() {
   const { section } = useParams();
 
-  const [articles, setArticles] = useState(() => {
-    if (!sessionStorage.articles) return null;
-
-    const arts = getArticlesFromSessionStorage();
-    if (section) {
-      const artsSection = arts.filter((article) => article.section === section);
-      return artsSection;
-    }
-    return arts;
-  });
-
-  useEffect(() => {
-    if (!sessionStorage.articles) {
-      const getArticlesFromFirebase = async () => {
-        const arts = await getAllArticlesFromFirebase();
-        section
-          ? setArticles(arts.filter((article) => article.section === section))
-          : setArticles(arts);
-        sendArticlesToSessionStorage(arts);
-      };
-      getArticlesFromFirebase();
-    } else {
-      const arts = getArticlesFromSessionStorage();
-      section
-        ? setArticles(arts.filter((article) => article.section === section))
-        : setArticles(arts);
-    }
-
-    scrollToTop();
-  }, [section]);
+  const { articles } = useArticlesLinks(section);
 
   if (
     section &&
@@ -79,5 +37,3 @@ function ArticlesLinksPage() {
     </>
   );
 }
-
-export default ArticlesLinksPage;
